@@ -674,10 +674,10 @@
     <section class="hero" id="home">
       <div class="hero-media">
         <div class="hero-slides" id="heroSlides">
-          <div class="hero-slide active"><img src="residential/resedential_1.jpg" alt="Residential cinematic hero" /></div>
-          <div class="hero-slide"><img src="commercial/commercial_1.jpg" alt="Commercial space hero" /></div>
-          <div class="hero-slide"><img src="store/store_1.jpg" alt="Store interior hero" /></div>
-          <div class="hero-slide"><img src="residential/resedential_5.jpg" alt="Residential luxury hero" /></div>
+          <div class="hero-slide active"><img src="residential/resedential_1.png" alt="Residential cinematic hero" /></div>
+          <div class="hero-slide"><img src="commercial/commercial_1.png" alt="Commercial space hero" /></div>
+          <div class="hero-slide"><img src="store/store_1.png" alt="Store interior hero" /></div>
+          <div class="hero-slide"><img src="residential/resedential_5.png" alt="Residential luxury hero" /></div>
         </div>
       </div>
       <div class="hero-overlay"></div>
@@ -782,7 +782,7 @@
           <article class="timeline-card reveal"><div class="num">05</div><h3>Delivery</h3><p>The project is prepared for execution through consistency, control, and a continuous link between design and outcome.</p></article>
         </div>
         <div class="wide-media reveal">
-          <img src="commercial/commercial_4.jpg" alt="Technical visual storytelling" />
+          <img src="commercial/commercial_4.png" alt="Technical visual storytelling" />
           <div class="overlay"><h3>Planning that preserves the original atmosphere.</h3></div>
         </div>
       </div>
@@ -1010,9 +1010,9 @@
        HOW TO UPDATE IMAGE COUNT:
        - Change the count number (e.g. buildGallery('residential', 25))
        - Make sure images in the folder are named:
-           residential/Resedential_1.jpg, Resedential_2.jpg ... Resedential_25.jpg
-           commercial/Commercial_1.jpg ... Commercial_7.jpg
-           store/store_1.jpg ... store_5.jpg
+           residential/Resedential_1.png, Resedential_2.png ... Resedential_25.png
+           commercial/Commercial_1.png ... Commercial_7.png
+           store/store_1.png ... store_5.png
     ─────────────────────────────────────────────────────────────── */
 
     function buildGallery(key, count) {
@@ -1066,7 +1066,7 @@
       for (let i = 1; i <= count; i++) {
         const caption = cfg.captions[(i - 1) % cfg.captions.length];
         items.push({
-          src: `${cfg.folder}/${cfg.prefix}${i}.jpg`,
+          src: `${cfg.folder}/${cfg.prefix}${i}.png`,
           title: cfg.label,
           text: caption
         });
