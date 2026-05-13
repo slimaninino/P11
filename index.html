@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MadameArchitect — Architecture, Interiors, Branding, Development, Installation</title>
+  <meta name="description" content="MadameArchitect is a luxury architecture and interior design studio crafting refined spaces through architecture, branding, development, and installation." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b0b0a;
+      --text:#f3eee6;
+      --muted:#b6aa9b;
+      --soft:#8b8074;
+      --line:rgba(255,255,255,.08);
+      --beige:#d9cdbc;
+      --sand:#b7a996;
+      --accent:#ece4d8;
+      --shadow:0 30px 80px rgba(0,0,0,.35);
+      --nav-h:84px;
+      --ease:cubic-bezier(.22,.61,.36,1);
+      --container:min(1280px, calc(100vw - 48px));
+      --serif:"Cormorant Garamond","Times New Roman",Georgia,serif;
+      --sans:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    /* Cormorant optical refinements */
+    h1, h2, h3, h4,
+    .section-title,
+    .quote-text,
+    .hero h1,
+    .service-card h3,
+    .timeline-card h3,
+    .editorial-card h3,
+    .modal-caption h4,
+    .slide-caption h4 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-style: normal;
+      letter-spacing: -.03em;
+    }
+
+    /* DM Sans body refinements */
+    body, p, a, button, span, li, small, .btn, .tag, .eyebrow,
+    .nav-links a, .ghost-btn, .contact-row, .lead {
+      font-family: var(--sans);
+      font-weight: 300;
+    }
+
+    .btn.primary, .btn.secondary, strong, .brand-text strong {
+      font-weight: 400;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:var(--sans);
+      background:linear-gradient(180deg,#0a0a09 0%,#11110f 45%,#0d0d0c 100%);
+      color:var(--text);overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+    body.menu-open,body.modal-open{overflow:hidden}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block;user-select:none;-webkit-user-drag:none}
+    button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+    .noise{
+      position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:2;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      background-size:200px 200px;mix-blend-mode:soft-light;
+    }
+
+    /* NAV */
+    .nav{
+      position:fixed;top:0;left:0;width:100%;height:var(--nav-h);z-index:1000;
+      transition:background .45s var(--ease),border-color .45s var(--ease),backdrop-filter .45s var(--ease);
+      border-bottom:1px solid transparent;
+    }
+    .nav.scrolled{
+      background:rgba(8,8,8,.6);
+      backdrop-filter:blur(18px) saturate(140%);
+      -webkit-backdrop-filter:blur(18px) saturate(140%);
+      border-color:var(--line);
+    }
+    .nav-inner{
+      width:var(--container);height:100%;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;gap:20px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:50px;height:50px;border-radius:50%;overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);background:#111;
+    }
+    .brand-logo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(1.05)}
+    .brand-text strong{
+      display:block;font-family:var(--serif);font-weight:400;
+      letter-spacing:.03em;font-size:1.05rem;white-space:nowrap;
+    }
+    .brand-text span{
+      display:block;color:var(--muted);font-size:.7rem;
+      letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;
+    }
+    .nav-links{display:flex;align-items:center;gap:26px}
+    .nav-links a{
+      position:relative;font-size:.8rem;letter-spacing:.18em;
+      text-transform:uppercase;color:rgba(243,238,230,.88);
+      transition:color .3s var(--ease);
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:0;bottom:-8px;
+      width:100%;height:1px;background:var(--beige);
+      transform:scaleX(0);transform-origin:right;
+      transition:transform .4s var(--ease);
+    }
+    .nav-links a:hover{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{
+      transform:scaleX(1);transform-origin:left;
+    }
+    .ghost-btn{
+      padding:12px 18px;border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;background:rgba(255,255,255,.04);
+      backdrop-filter:blur(10px);font-size:.76rem;
+      letter-spacing:.16em;text-transform:uppercase;
+      transition:all .35s var(--ease);
+    }
+    .ghost-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.28);
+      background:rgba(255,255,255,.08);
+    }
+    .menu-toggle{
+      display:none;width:52px;height:52px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+      position:relative;flex:0 0 auto;
+    }
+    .menu-toggle span{
+      position:absolute;left:50%;width:20px;height:1.5px;
+      background:#f6f0e7;transition:transform .35s var(--ease),opacity .35s var(--ease),top .35s var(--ease);
+      transform:translateX(-50%);
+    }
+    .menu-toggle span:nth-child(1){top:20px}
+    .menu-toggle span:nth-child(2){top:26px}
+    .menu-toggle span:nth-child(3){top:32px}
+    .menu-open .menu-toggle span:nth-child(1){top:26px;transform:translateX(-50%) rotate(45deg)}
+    .menu-open .menu-toggle span:nth-child(2){opacity:0}
+    .menu-open .menu-toggle span:nth-child(3){top:26px;transform:translateX(-50%) rotate(-45deg)}
+    .mobile-menu{
+      position:fixed;inset:0;z-index:999;
+      display:flex;align-items:flex-start;justify-content:flex-end;pointer-events:none;
+    }
+    .mobile-backdrop{
+      position:absolute;inset:0;background:rgba(4,4,4,.6);
+      backdrop-filter:blur(8px);opacity:0;transition:opacity .4s var(--ease);
+    }
+    .mobile-panel{
+      position:relative;width:min(100%,420px);height:100%;
+      background:rgba(14,14,12,.98);border-left:1px solid rgba(255,255,255,.08);
+      padding:112px 28px 32px;transform:translateX(100%);
+      transition:transform .5s var(--ease);
+    }
+    .menu-open .mobile-menu{pointer-events:auto}
+    .menu-open .mobile-backdrop{opacity:1}
+    .menu-open .mobile-panel{transform:translateX(0)}
+    .mobile-links{display:flex;flex-direction:column;gap:8px}
+    .mobile-links a{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:1rem;letter-spacing:.12em;text-transform:uppercase;
+    }
+    .mobile-links a span:last-child{color:var(--muted);font-size:.8rem}
+
+    /* MAIN */
+    main{position:relative;z-index:3}
+    section{position:relative;padding:120px 0;scroll-margin-top:calc(var(--nav-h) + 18px)}
+    .section-shell{width:var(--container);margin:0 auto;position:relative}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      color:var(--muted);text-transform:uppercase;
+      letter-spacing:.24em;font-size:.72rem;margin-bottom:20px;
+    }
+    .eyebrow::before{content:"";width:34px;height:1px;background:rgba(255,255,255,.18)}
+
+    /* HERO */
+    .hero{
+      min-height:100svh;min-height:100vh;
+      display:flex;align-items:flex-end;
+      padding:calc(var(--nav-h) + 24px) 0 42px;overflow:hidden;
+    }
+    .hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
+    .hero-slides{width:100%;height:100%;position:relative}
+    .hero-slide{
+      position:absolute;inset:0;opacity:0;
+      transition:opacity 1.4s var(--ease),transform 6s linear;
+      transform:scale(1.06);
+    }
+    .hero-slide.active{opacity:1;transform:scale(1)}
+    .hero-slide img{
+      width:100%;height:100%;object-fit:cover;
+      filter:grayscale(.08) brightness(.52) contrast(1.02) saturate(.9);
+    }
+    .hero-overlay{
+      position:absolute;inset:0;z-index:-1;
+      background:linear-gradient(180deg,rgba(6,6,6,.22) 0%,rgba(6,6,6,.44) 30%,rgba(6,6,6,.8) 100%);
+    }
+    .hero-grid{
+      width:var(--container);margin:0 auto;
+      display:grid;grid-template-columns:1.3fr .7fr;gap:50px;align-items:end;
+    }
+    .hero h1{
+      margin:0 0 22px;font-family:var(--serif);font-weight:400;
+      font-size:clamp(3.2rem,9vw,7.4rem);line-height:.95;
+      letter-spacing:-.04em;max-width:10ch;
+    }
+    .hero p{
+      margin:0;max-width:640px;
+      font-size:clamp(.98rem,1.6vw,1.2rem);line-height:1.75;
+      color:rgba(243,238,230,.84);
+    }
+    .hero-ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:52px;padding:0 24px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);text-transform:uppercase;
+      letter-spacing:.16em;font-size:.76rem;transition:all .35s var(--ease);
+      background:rgba(255,255,255,.04);backdrop-filter:blur(8px);
+    }
+    .btn.primary{background:var(--accent);color:#111;border-color:transparent}
+    .btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(236,228,216,.18)}
+    .btn.secondary:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.08);
+    }
+    .hero-side{
+      justify-self:end;width:min(100%,340px);padding:26px;border-radius:26px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(14px);box-shadow:var(--shadow);
+    }
+    .hero-side .meta{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-top:20px;
+    }
+    .meta-card small{
+      display:block;color:var(--muted);text-transform:uppercase;
+      letter-spacing:.16em;font-size:.64rem;margin-bottom:8px;
+    }
+    .meta-card strong{font-weight:500;line-height:1.5;color:#f6f2eb}
+    .scroll-indicator{
+      position:absolute;left:24px;bottom:24px;z-index:5;
+      display:flex;align-items:center;gap:12px;
+      color:rgba(255,255,255,.7);font-size:.72rem;
+      letter-spacing:.18em;text-transform:uppercase;
+    }
+    .scroll-line{
+      width:52px;height:1px;background:rgba(255,255,255,.28);
+      overflow:hidden;position:relative;
+    }
+    .scroll-line::after{
+      content:"";position:absolute;left:-100%;top:0;
+      width:100%;height:100%;background:#fff;
+      animation:scrollLine 2.2s infinite ease-in-out;
+    }
+    @keyframes scrollLine{0%{left:-100%}100%{left:100%}}
+
+    /* SPLIT LAYOUT */
+    .split{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end}
+    .section-title{
+      font-family:var(--serif);font-weight:400;
+      font-size:clamp(2.1rem,4.4vw,4.4rem);line-height:1.02;
+      letter-spacing:-.03em;margin:0 0 16px;
+    }
+    .lead{
+      margin:0;color:rgba(243,238,230,.8);
+      font-size:1.02rem;line-height:1.9;max-width:64ch;
+    }
+    .note-card{
+      padding:28px;border-radius:24px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(243,238,230,.8);box-shadow:var(--shadow);
+    }
+    .note-card p{margin:0;line-height:1.85}
+
+    /* SERVICE GRID */
+    .services-grid{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;margin-top:42px;
+    }
+    .service-card{
+      min-height:260px;padding:26px;border-radius:24px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .45s var(--ease),border-color .45s var(--ease);
+    }
+    .service-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.16)}
+    .service-index{
+      color:var(--soft);font-size:.74rem;letter-spacing:.18em;
+      text-transform:uppercase;margin-bottom:22px;display:block;
+    }
+    .service-card h3{
+      margin:0 0 14px;font-family:var(--serif);
+      font-weight:400;font-size:1.95rem;letter-spacing:-.03em;
+    }
+    .service-card p{margin:0;color:rgba(243,238,230,.76);line-height:1.8;font-size:.94rem}
+
+    /* QUOTE */
+    .quote-block{
+      margin-top:40px;padding:40px 0 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:grid;grid-template-columns:.65fr 1.35fr;gap:28px;align-items:start;
+    }
+    .quote-label{
+      color:var(--muted);text-transform:uppercase;
+      letter-spacing:.2em;font-size:.72rem;padding-top:12px;
+    }
+    .quote-text{
+      margin:0;font-family:var(--serif);
+      font-size:clamp(1.7rem,3.2vw,3.3rem);
+      line-height:1.14;letter-spacing:-.03em;max-width:17ch;
+    }
+
+    /* EDITORIAL GRID */
+    .editorial-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:42px;
+    }
+    .editorial-card{
+      padding:30px;border-radius:26px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      min-height:280px;display:flex;flex-direction:column;
+      justify-content:space-between;
+    }
+    .editorial-card h3{
+      margin:0 0 14px;font-family:var(--serif);
+      font-size:1.95rem;font-weight:400;letter-spacing:-.03em;
+    }
+    .editorial-card p{
+      margin:0;line-height:1.85;
+      color:rgba(243,238,230,.78);max-width:50ch;
+    }
+    .editorial-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .tag{
+      padding:9px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);color:var(--muted);
+      font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    }
+
+    /* TIMELINE */
+    .timeline{
+      margin-top:46px;display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;
+    }
+    .timeline-card{
+      padding:24px;border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);min-height:250px;
+    }
+    .timeline-card .num{
+      display:inline-flex;width:44px;height:44px;align-items:center;
+      justify-content:center;border:1px solid rgba(255,255,255,.14);
+      border-radius:50%;color:var(--beige);font-size:.76rem;
+      letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;
+    }
+    .timeline-card h3{
+      margin:0 0 12px;font-family:var(--serif);
+      font-size:1.8rem;font-weight:400;letter-spacing:-.03em;
+    }
+    .timeline-card p{
+      margin:0;color:rgba(243,238,230,.76);line-height:1.8;font-size:.93rem;
+    }
+
+    /* WIDE MEDIA */
+    .wide-media{
+      margin-top:46px;border-radius:28px;overflow:hidden;
+      position:relative;min-height:70vh;box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .wide-media img{
+      width:100%;height:100%;object-fit:cover;
+      filter:brightness(.7) contrast(1.02) saturate(.9);
+      transform:scale(1.03);transition:transform 2.4s var(--ease);
+    }
+    .wide-media:hover img{transform:scale(1)}
+    .wide-media .overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(7,7,7,.16) 0%,rgba(7,7,7,.66) 100%);
+      display:flex;align-items:flex-end;padding:32px;
+    }
+    .wide-media .overlay h3{
+      margin:0;font-family:var(--serif);font-weight:400;
+      font-size:clamp(1.7rem,4vw,3.8rem);letter-spacing:-.03em;max-width:14ch;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-section{padding-top:90px}
+    .portfolio-category{
+      margin-top:56px;padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .portfolio-head{
+      display:flex;justify-content:space-between;align-items:end;
+      gap:24px;margin-bottom:24px;flex-wrap:wrap;
+    }
+    .portfolio-head h3{
+      margin:8px 0 0;font-family:var(--serif);font-weight:400;
+      font-size:clamp(1.8rem,3.2vw,3rem);letter-spacing:-.03em;
+    }
+    .portfolio-meta{
+      display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+      color:var(--muted);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+    }
+
+    /* SLIDER */
+    .slider{
+      position:relative;overflow:hidden;border-radius:28px;
+      background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);touch-action:pan-y pinch-zoom;
+    }
+    .slider-track{
+      display:flex;transition:transform .9s var(--ease);
+      will-change:transform;cursor:grab;
+    }
+    .slider-track.dragging{cursor:grabbing;transition:none}
+    .slide{
+      min-width:100%;position:relative;
+      height:clamp(340px,56vw,740px);overflow:hidden;background:#111;
+    }
+    .slide img{
+      width:100%;height:100%;object-fit:cover;
+      filter:brightness(.86) saturate(.94);
+      transition:transform 1.8s var(--ease),filter .6s var(--ease);
+    }
+    .slide:hover img{transform:scale(1.03);filter:brightness(.95) saturate(1)}
+    .slide-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(8,8,8,.02) 0%,rgba(8,8,8,.28) 55%,rgba(8,8,8,.62) 100%);
+      display:flex;align-items:flex-end;justify-content:space-between;
+      gap:20px;padding:28px;
+    }
+    .slide-caption h4{
+      margin:0 0 8px;font-family:var(--serif);font-weight:400;
+      font-size:clamp(1.25rem,2.1vw,2.1rem);letter-spacing:-.03em;
+    }
+    .slide-caption p{
+      margin:0;max-width:52ch;color:rgba(243,238,230,.78);
+      line-height:1.7;font-size:.94rem;
+    }
+    .view-btn{
+      min-width:100px;height:44px;padding:0 16px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);
+      backdrop-filter:blur(10px);font-size:.72rem;letter-spacing:.16em;
+      text-transform:uppercase;transition:all .35s var(--ease);
+    }
+    .view-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+    .slider-controls{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;
+    }
+    .slider-progress{
+      flex:1;height:2px;background:rgba(255,255,255,.08);
+      position:relative;overflow:hidden;border-radius:999px;
+    }
+    .slider-progress-bar{
+      position:absolute;left:0;top:0;height:100%;width:0%;
+      background:linear-gradient(90deg,var(--sand),var(--accent));
+      transition:width 5s linear;
+    }
+    .slider-indicators{
+      display:flex;align-items:center;gap:10px;
+      color:var(--muted);font-size:.74rem;letter-spacing:.16em;
+      text-transform:uppercase;white-space:nowrap;
+    }
+    .mini-controls{display:flex;align-items:center;gap:10px}
+    .icon-btn{
+      width:46px;height:46px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);
+      transition:all .35s var(--ease);display:inline-flex;
+      align-items:center;justify-content:center;
+    }
+    .icon-btn:hover{
+      background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);transform:translateY(-1px);
+    }
+
+    /* CONTACT */
+    .contact-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;margin-top:40px}
+    .contact-card,.contact-list{
+      border-radius:28px;padding:30px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);box-shadow:var(--shadow);
+    }
+    .contact-card p{margin:0;color:rgba(243,238,230,.82);line-height:1.9;max-width:60ch}
+    .contact-list{display:grid;gap:12px;align-content:start}
+    .contact-row{
+      display:flex;justify-content:space-between;gap:16px;
+      padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .contact-row:last-child{border-bottom:none}
+    .contact-row span:first-child{
+      color:var(--muted);text-transform:uppercase;
+      letter-spacing:.18em;font-size:.72rem;white-space:nowrap;
+    }
+    .contact-row span:last-child{color:#f5efe8;text-align:right;word-break:break-word}
+
+    /* FOOTER */
+    footer{padding:26px 0 50px;position:relative;z-index:3}
+    .footer-inner{
+      width:var(--container);margin:0 auto;padding-top:24px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+      color:rgba(243,238,230,.55);font-size:.8rem;
+      letter-spacing:.1em;text-transform:uppercase;
+    }
+
+    /* REVEAL ANIMATION */
+    .reveal{
+      opacity:0;transform:translateY(32px) scale(.98);
+      transition:opacity .9s var(--ease),transform .9s var(--ease);
+    }
+    .reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+
+    /* MODAL / LIGHTBOX */
+    .modal{
+      position:fixed;inset:0;z-index:2000;
+      display:flex;align-items:center;justify-content:center;padding:24px;
+      opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+    }
+    .modal.open{opacity:1;pointer-events:auto}
+    .modal-backdrop{
+      position:absolute;inset:0;background:rgba(3,3,3,.82);
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    }
+    .modal-content{
+      position:relative;width:min(1400px,100%);height:min(90vh,980px);
+      border-radius:28px;overflow:hidden;background:#0e0e0c;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:0 40px 120px rgba(0,0,0,.55);
+      transform:translateY(16px) scale(.985);
+      transition:transform .45s var(--ease);
+    }
+    .modal.open .modal-content{transform:translateY(0) scale(1)}
+    .modal-media{
+      width:100%;height:100%;position:relative;
+      touch-action:pan-y pinch-zoom;
+    }
+    .modal-media img{width:100%;height:100%;object-fit:contain;background:#0b0b0a}
+    .modal-top{
+      position:absolute;top:16px;left:16px;right:16px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;z-index:5;pointer-events:none;
+    }
+    .modal-top > *{pointer-events:auto}
+    .modal-counter{
+      padding:10px 16px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.07);backdrop-filter:blur(10px);
+      font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+    }
+    .modal-close{
+      width:48px;height:48px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.07);backdrop-filter:blur(10px);
+      font-size:1.1rem;
+    }
+    .modal-nav{
+      position:absolute;inset:0;display:flex;
+      align-items:center;justify-content:space-between;
+      padding:0 16px;pointer-events:none;
+    }
+    .modal-nav .icon-btn{
+      width:58px;height:58px;background:rgba(255,255,255,.07);
+      backdrop-filter:blur(10px);pointer-events:auto;
+    }
+    .modal-caption{
+      position:absolute;left:20px;right:20px;bottom:20px;
+      display:flex;justify-content:space-between;gap:20px;align-items:end;
+      padding:18px 20px;border-radius:22px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);
+    }
+    .modal-caption h4{
+      margin:0 0 6px;font-family:var(--serif);
+      font-size:1.6rem;font-weight:400;letter-spacing:-.03em;
+    }
+    .modal-caption p{margin:0;color:rgba(243,238,230,.75);font-size:.92rem;line-height:1.7}
+    .modal-hint{
+      color:var(--muted);font-size:.7rem;
+      letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      .nav-links,.ghost-btn{display:none}
+      .menu-toggle{display:inline-flex}
+      .hero-grid,.split,.quote-block,.contact-wrap{grid-template-columns:1fr}
+      .hero-side{justify-self:start;width:min(100%,500px)}
+      .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:760px){
+      :root{--nav-h:72px;--container:min(100vw - 28px,1000px)}
+      section{padding:80px 0}
+      .hero h1{max-width:none}
+      .hero-ctas .btn{width:100%}
+      .hero-side{padding:20px}
+      .hero-side .meta{grid-template-columns:1fr}
+      .services-grid,.editorial-grid,.timeline{grid-template-columns:1fr}
+      .slide{height:68vw;min-height:300px;max-height:500px}
+      .slide-overlay{padding:18px;flex-direction:column;align-items:flex-start}
+      .slider-controls{flex-direction:column;align-items:flex-start}
+      .modal{padding:10px}
+      .modal-content{height:min(90vh,740px);border-radius:20px}
+      .modal-nav{padding:0 8px}
+      .modal-nav .icon-btn{width:48px;height:48px}
+      .modal-caption{left:10px;right:10px;bottom:10px;flex-direction:column;align-items:flex-start}
+      .modal-caption h4{font-size:1.15rem}
+      .footer-inner{flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <header class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="brand" aria-label="MadameArchitect home">
+        <div class="brand-logo">
+          <img src="Logo.jpg" alt="MadameArchitect logo" />
+        </div>
+        <div class="brand-text">
+          <strong>MadameArchitect</strong>
+          <span>Architecture / Interiors</span>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#creative">Creative</a>
+        <a href="#develop">Develop</a>
+        <a href="#installation">Installation</a>
+        <a href="#branding">Branding</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="#portfolio" class="ghost-btn">View Portfolio</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <aside class="mobile-panel">
+      <nav class="mobile-links">
+        <a href="#home"><span>Home</span><span>01</span></a>
+        <a href="#creative"><span>Creative</span><span>02</span></a>
+        <a href="#develop"><span>Develop</span><span>03</span></a>
+        <a href="#installation"><span>Installation</span><span>04</span></a>
+        <a href="#branding"><span>Branding</span><span>05</span></a>
+        <a href="#portfolio"><span>Portfolio</span><span>06</span></a>
+        <a href="#contact"><span>Contact</span><span>07</span></a>
+      </nav>
+    </aside>
+  </div>
+
+  <main>
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+      <div class="hero-media">
+        <div class="hero-slides" id="heroSlides">
+          <div class="hero-slide active"><img src="residential/Resedential_1.jpg" alt="Residential cinematic hero" /></div>
+          <div class="hero-slide"><img src="commercial/Commercial_1.jpg" alt="Commercial space hero" /></div>
+          <div class="hero-slide"><img src="store/store_1.jpg" alt="Store interior hero" /></div>
+          <div class="hero-slide"><img src="residential/Resedential_5.jpg" alt="Residential luxury hero" /></div>
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Architecture / Interiors / Identity</div>
+          <h1>Spaces designed with calm, precision, and presence.</h1>
+          <p>MadameArchitect creates refined environments where architecture, interior design, branding, development, and installation move as one—crafted through atmosphere, material clarity, and a cinematic sense of restraint.</p>
+          <div class="hero-ctas">
+            <a href="#portfolio" class="btn primary">View Portfolio</a>
+            <a href="#develop" class="btn secondary">Explore Process</a>
+          </div>
+        </div>
+        <div class="hero-side reveal">
+          <div class="eyebrow">Studio Overview</div>
+          <p style="margin:0;color:rgba(243,238,230,.82);line-height:1.85">A luxury architecture and interior design studio shaping residential, commercial, and retail spaces through editorial design language and disciplined execution.</p>
+          <div class="meta">
+            <div class="meta-card"><small>Services</small><strong>Creative Direction<br>Architecture<br>Interior Design</strong></div>
+            <div class="meta-card"><small>Delivery</small><strong>Development<br>Branding<br>Installation</strong></div>
+            <div class="meta-card"><small>Approach</small><strong>Minimal Luxury<br>Warm Modernism</strong></div>
+            <div class="meta-card"><small>Focus</small><strong>Stores<br>Commercial<br>Residential</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span class="scroll-line"></span><span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- CREATIVE -->
+    <section id="creative">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Creative</div>
+            <h2 class="section-title">Every project begins with atmosphere.</h2>
+            <p class="lead">Before form is finalized, mood is defined. We shape creative direction through light, balance, restraint, texture, and visual rhythm so that each environment feels intentional before it is ever built.</p>
+          </div>
+          <div class="note-card">
+            <p>Our creative process is editorial in spirit. Concepts are arranged as experiences rather than objects—paced through silence, contrast, tactility, and a deep understanding of how architecture should be felt as much as seen.</p>
+          </div>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <span class="service-index">01 / Philosophy</span><h3>Atmosphere</h3>
+            <p>We define how a space should feel first—calm, elevated, grounded, luminous—then translate that emotion into material and spatial decisions.</p>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-index">02 / Moodboards</span><h3>Texture</h3>
+            <p>Stone, wood, plaster, glass, shadow, and fabric are curated as a unified sensory palette, never as disconnected finishes.</p>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-index">03 / Concepts</span><h3>Narrative</h3>
+            <p>Each concept is developed like a visual story with focal moments, transitions, and compositions that guide the eye and the body.</p>
+          </article>
+          <article class="service-card reveal">
+            <span class="service-index">04 / Layouts</span><h3>Restraint</h3>
+            <p>Luxury is expressed through proportion, emptiness, clarity, and detail rather than excess, allowing the architecture to remain timeless.</p>
+          </article>
+        </div>
+        <div class="editorial-grid">
+          <article class="editorial-card reveal">
+            <div>
+              <h3>Material, tone, and visual calm.</h3>
+              <p>Creative studies focus on harmony rather than decoration. We build relationships between neutral palettes, warm light, tactile surfaces, and carefully scaled forms to create spaces that feel deeply composed.</p>
+            </div>
+            <div class="editorial-tags"><span class="tag">Light</span><span class="tag">Stone</span><span class="tag">Warm Gray</span><span class="tag">Editorial</span></div>
+          </article>
+          <article class="editorial-card reveal">
+            <div>
+              <h3>Concepts shaped like experiences.</h3>
+              <p>From first impression to final pause point, every visual decision supports movement and atmosphere. The result is an environment with its own internal rhythm and unmistakable identity.</p>
+            </div>
+            <div class="editorial-tags"><span class="tag">Proportion</span><span class="tag">Rhythm</span><span class="tag">Minimal</span><span class="tag">Luxury</span></div>
+          </article>
+        </div>
+        <div class="quote-block reveal">
+          <div class="quote-label">Creative Principle</div>
+          <p class="quote-text">We design from emotion toward structure, never the other way around.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEVELOP -->
+    <section id="develop">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Develop</div>
+            <h2 class="section-title">Precision gives beauty its structure.</h2>
+            <p class="lead">Our development process protects the original vision through a disciplined framework that aligns concept, planning, technical decisions, material logic, and execution.</p>
+          </div>
+          <div class="note-card">
+            <p>The strongest projects are resolved long before completion. We use workflow clarity, technical storytelling, and measured progression to ensure that atmosphere survives every stage of development.</p>
+          </div>
+        </div>
+        <div class="timeline">
+          <article class="timeline-card reveal"><div class="num">01</div><h3>Brief</h3><p>We define ambition, context, function, emotional direction, and design priorities with precision from the beginning.</p></article>
+          <article class="timeline-card reveal"><div class="num">02</div><h3>Research</h3><p>Site conditions, references, use patterns, spatial opportunities, and constraints are studied to establish the project's logic.</p></article>
+          <article class="timeline-card reveal"><div class="num">03</div><h3>Strategy</h3><p>Circulation, hierarchy, volume, scale, and balance are organized into a coherent architectural framework.</p></article>
+          <article class="timeline-card reveal"><div class="num">04</div><h3>Detail</h3><p>Material coordination, technical alignment, and construction intent are refined so the concept remains exact.</p></article>
+          <article class="timeline-card reveal"><div class="num">05</div><h3>Delivery</h3><p>The project is prepared for execution through consistency, control, and a continuous link between design and outcome.</p></article>
+        </div>
+        <div class="wide-media reveal">
+          <img src="commercial/Commercial_4.jpg" alt="Technical visual storytelling" />
+          <div class="overlay"><h3>Planning that preserves the original atmosphere.</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALLATION -->
+    <section id="installation">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Installation</div>
+            <h2 class="section-title">Where concept becomes presence.</h2>
+            <p class="lead">Installation is the moment design enters reality. Furniture, lighting, materials, and final placement are orchestrated so the environment feels complete, intentional, and spatially calm.</p>
+          </div>
+          <div class="note-card">
+            <p>We treat execution as a continuation of design—not a separate phase. Every installation decision must support proportion, texture, circulation, and the lived experience of the finished space.</p>
+          </div>
+        </div>
+        <div class="editorial-grid">
+          <article class="editorial-card reveal">
+            <div><h3>Furniture integration</h3><p>Objects are selected and positioned to belong to the architecture. Scale, silhouette, and spacing are composed to support comfort without visual noise.</p></div>
+            <div class="editorial-tags"><span class="tag">Furniture</span><span class="tag">Placement</span><span class="tag">Flow</span></div>
+          </article>
+          <article class="editorial-card reveal">
+            <div><h3>Lighting systems</h3><p>Light is designed to reveal material depth, soften transitions, and create a layered atmosphere that changes gracefully throughout the day.</p></div>
+            <div class="editorial-tags"><span class="tag">Warm Light</span><span class="tag">Contrast</span><span class="tag">Depth</span></div>
+          </article>
+          <article class="editorial-card reveal">
+            <div><h3>Material application</h3><p>Stone, timber, plaster, metal, and textile surfaces are coordinated to feel tactile and resolved, with every transition handled with quiet precision.</p></div>
+            <div class="editorial-tags"><span class="tag">Stone</span><span class="tag">Wood</span><span class="tag">Finish</span></div>
+          </article>
+          <article class="editorial-card reveal">
+            <div><h3>On-site choreography</h3><p>From final adjustments to visual balance, installation is directed so the completed space reads as one continuous, intentional composition.</p></div>
+            <div class="editorial-tags"><span class="tag">Execution</span><span class="tag">Detail</span><span class="tag">Atmosphere</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRANDING -->
+    <section id="branding">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Branding</div>
+            <h2 class="section-title">Identity should be felt in space.</h2>
+            <p class="lead">We create brand systems that move beyond graphics into atmosphere, signage, material expression, layout rhythm, and the emotional experience of a place.</p>
+          </div>
+          <div class="note-card">
+            <p>For retail and commercial projects, branding becomes spatial communication. Typography, palette, display logic, and environmental cues are shaped as one clear visual language.</p>
+          </div>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal"><span class="service-index">01 / Identity</span><h3>Presence</h3><p>A brand becomes stronger when it is embedded into architecture, surface treatment, signage, and movement through the space.</p></article>
+          <article class="service-card reveal"><span class="service-index">02 / Spatial</span><h3>Language</h3><p>We unify type, materials, placement, and atmosphere so every physical touchpoint feels coherent and unmistakably premium.</p></article>
+          <article class="service-card reveal"><span class="service-index">03 / Retail</span><h3>Clarity</h3><p>Store identity is shaped through sequencing, display hierarchy, focal moments, and a luxury rhythm that never feels crowded.</p></article>
+          <article class="service-card reveal"><span class="service-index">04 / Editorial</span><h3>Communication</h3><p>Brand presentation is refined through art direction, layouts, captions, and visual pacing that support a sophisticated world.</p></article>
+        </div>
+        <div class="quote-block reveal">
+          <div class="quote-label">Brand Principle</div>
+          <p class="quote-text">A powerful identity is not only seen—it is inhabited.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio-section">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Portfolio</div>
+            <h2 class="section-title">Stores, commercial environments, and residential spaces.</h2>
+            <p class="lead">Click any image to open fullscreen. Drag or swipe through each category. All 37 projects across three collections are presented here as an immersive sliding gallery.</p>
+          </div>
+          <div class="note-card">
+            <p>Images load from the <code style="opacity:.7;font-size:.9em">residential/</code>, <code style="opacity:.7;font-size:.9em">commercial/</code>, and <code style="opacity:.7;font-size:.9em">store/</code> folders placed alongside this HTML file. Add or remove images from those folders and update the count in the JavaScript gallery arrays.</p>
+          </div>
+        </div>
+
+        <!-- STORES SLIDER -->
+        <div class="portfolio-category reveal">
+          <div class="portfolio-head">
+            <div><div class="eyebrow">Category 01</div><h3>Stores</h3></div>
+            <div class="portfolio-meta"><span>5 Projects</span><span>Auto / 5s</span><span>Drag + Swipe</span></div>
+          </div>
+          <div class="slider" data-slider="stores" data-total="5">
+            <div class="slider-track" id="track-stores"></div>
+          </div>
+          <div class="slider-controls">
+            <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+            <div class="slider-indicators"><span class="slider-current">01</span><span>/</span><span class="slider-total">05</span></div>
+            <div class="mini-controls">
+              <button class="icon-btn slider-prev" type="button" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-btn slider-next" type="button" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMMERCIAL SLIDER -->
+        <div class="portfolio-category reveal">
+          <div class="portfolio-head">
+            <div><div class="eyebrow">Category 02</div><h3>Commercial</h3></div>
+            <div class="portfolio-meta"><span>7 Projects</span><span>Immersive Gallery</span><span>Infinite Loop</span></div>
+          </div>
+          <div class="slider" data-slider="commercial" data-total="7">
+            <div class="slider-track" id="track-commercial"></div>
+          </div>
+          <div class="slider-controls">
+            <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+            <div class="slider-indicators"><span class="slider-current">01</span><span>/</span><span class="slider-total">07</span></div>
+            <div class="mini-controls">
+              <button class="icon-btn slider-prev" type="button" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-btn slider-next" type="button" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESIDENTIAL SLIDER -->
+        <div class="portfolio-category reveal">
+          <div class="portfolio-head">
+            <div><div class="eyebrow">Category 03</div><h3>Residential</h3></div>
+            <div class="portfolio-meta"><span>25 Projects</span><span>Touch Friendly</span><span>Fullscreen Popup</span></div>
+          </div>
+          <div class="slider" data-slider="residential" data-total="25">
+            <div class="slider-track" id="track-residential"></div>
+          </div>
+          <div class="slider-controls">
+            <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+            <div class="slider-indicators"><span class="slider-current">01</span><span>/</span><span class="slider-total">25</span></div>
+            <div class="mini-controls">
+              <button class="icon-btn slider-prev" type="button" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-btn slider-next" type="button" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-shell">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">Contact</div>
+            <h2 class="section-title">Begin a conversation.</h2>
+            <p class="lead">For private residences, branded environments, interior concepts, and spatial identity projects, MadameArchitect offers a calm and considered design process from concept to completion.</p>
+          </div>
+          <div class="note-card">
+            <p>Contact details below are structured as placeholders ready to be replaced with final business information without changing the layout or animation system of the page.</p>
+          </div>
+        </div>
+        <div class="contact-wrap">
+          <div class="contact-card reveal">
+            <div class="eyebrow">Studio Contact</div>
+            <p>Whether the project is residential, retail, commercial, or brand-led, each engagement begins with a conversation about atmosphere, purpose, visual identity, and the level of execution required to deliver a space with lasting presence.</p>
+          </div>
+          <div class="contact-list reveal">
+            <div class="contact-row"><span>Email</span><span>@madamearchitects.com</span></div>
+            <div class="contact-row"><span>Instagram</span><span>@madamearchitects.com</span></div>
+            <div class="contact-row"><span>WhatsApp</span><span>@madamearchitects.com</span></div>
+            <div class="contact-row"><span>Office</span><span>@madamearchitects.com</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>MadameArchitect</span>
+      <span>Architecture / Interior Design / Branding / Development / Installation</span>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="modal" id="lightbox" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+      <div class="modal-media" id="modalMedia">
+        <img id="modalImage" src="" alt="Expanded project view" />
+      </div>
+      <div class="modal-top">
+        <div class="modal-counter" id="modalCounter">01 / 01</div>
+        <button class="modal-close" id="modalClose" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-nav">
+        <button class="icon-btn" id="modalPrev" aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn" id="modalNext" aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-caption">
+        <div>
+          <h4 id="modalTitle">Project View</h4>
+          <p id="modalText">MadameArchitect — architecture and interior design.</p>
+        </div>
+        <div class="modal-hint">Swipe / Arrows / Esc</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ─── GALLERY DATA ──────────────────────────────────────────────
+       HOW TO UPDATE IMAGE COUNT:
+       - Change the count number (e.g. buildGallery('residential', 25))
+       - Make sure images in the folder are named:
+           residential/Resedential_1.jpg, Resedential_2.jpg ... Resedential_25.jpg
+           commercial/Commercial_1.jpg ... Commercial_7.jpg
+           store/store_1.jpg ... store_5.jpg
+    ─────────────────────────────────────────────────────────────── */
+
+    function buildGallery(key, count) {
+      const configs = {
+        residential: {
+          folder: 'residential',
+          prefix: 'Resedential_',
+          label: 'Residential',
+          captions: [
+            'Warm living architecture with softness, order, and a deeply composed interior tone.',
+            'A tactile home environment balancing natural materials, silence, and visual depth.',
+            'Layered surfaces and warm neutral light create an intimate, elevated daily experience.',
+            'Minimal yet rich, this interior is shaped through proportion, emptiness, and detail.',
+            'Calm architecture and subtle contrast support a luxurious but understated mood.',
+            'Structured comfort defined by quiet material transitions and disciplined visual rhythm.',
+            'An elegant interior language that lets natural tone and negative space lead the experience.',
+            'A refined domestic setting composed through texture, warmth, and long visual lines.',
+            'Quietly cinematic, with balanced focal points and an atmosphere of modern ease.',
+            'A final expression of warm minimalism, natural depth, and immersive domestic luxury.'
+          ]
+        },
+        commercial: {
+          folder: 'commercial',
+          prefix: 'Commercial_',
+          label: 'Commercial',
+          captions: [
+            'A contemporary business environment with clear geometry and elevated material rhythm.',
+            'Spatial branding and interior refinement meet within a composed corporate atmosphere.',
+            'Clean lines, layered lighting, and strong visual calm define this interior experience.',
+            'A premium environment designed through precision, hierarchy, and restrained impact.',
+            'Editorial proportion and material simplicity create a distinctive commercial identity.',
+            'Atmospheric lighting and sculpted visual rhythm bring clarity to the built experience.',
+            'A polished destination where architecture and brand perception feel seamlessly aligned.'
+          ]
+        },
+        store: {
+          folder: 'store',
+          prefix: 'store_',
+          label: 'Store',
+          captions: [
+            'Retail architecture shaped through clarity, premium restraint, and spatial identity.',
+            'Warm modern surfaces and editorial composition for a refined branded environment.',
+            'Balanced visual rhythm, display hierarchy, and premium material continuity.',
+            'Architectural retail storytelling with calm lighting and distinctive identity cues.',
+            'A luxury retail mood defined by restraint, proportion, and tactile visual clarity.'
+          ]
+        }
+      };
+      const cfg = configs[key];
+      const items = [];
+      for (let i = 1; i <= count; i++) {
+        const caption = cfg.captions[(i - 1) % cfg.captions.length];
+        items.push({
+          src: `${cfg.folder}/${cfg.prefix}${i}.jpg`,
+          title: cfg.label,
+          text: caption
+        });
+      }
+      return items;
+    }
+
+    const GALLERY = {
+      stores:      buildGallery('store', 5),
+      commercial:  buildGallery('commercial', 7),
+      residential: buildGallery('residential', 25)
+    };
+
+    /* ─── BUILD SLIDE HTML ───────────────────────────────────────── */
+    function buildSlides(galleryKey) {
+      const track = document.getElementById('track-' + galleryKey);
+      if (!track) return;
+      const items = GALLERY[galleryKey];
+      track.innerHTML = items.map((item, i) => `
+        <article class="slide" data-index="${i}" data-gallery="${galleryKey}">
+          <img src="${item.src}" alt="${item.title}" loading="lazy" />
+          <div class="slide-overlay">
+            <div class="slide-caption">
+              <h4>${item.title}</h4>
+              <p>${item.text}</p>
+            </div>
+            <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">Open</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    buildSlides('stores');
+    buildSlides('commercial');
+    buildSlides('residential');
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    const body = document.body;
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileBackdrop = document.getElementById('mobileBackdrop');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    }, {passive: true});
+
+    function openMenu() {
+      body.classList.add('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+    function closeMenu() {
+      body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    }
+    menuToggle.addEventListener('click', () => body.classList.contains('menu-open') ? closeMenu() : openMenu());
+    mobileBackdrop.addEventListener('click', closeMenu);
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    /* ─── ACTIVE NAV LINKS ───────────────────────────────────────── */
+    const navAnchors = [...document.querySelectorAll('.nav-links a')];
+    new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting)
+          navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, {rootMargin:'-40% 0px -45% 0px', threshold: 0}).observe;
+
+    document.querySelectorAll('main section[id]').forEach(sec => {
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting)
+            navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        });
+      }, {rootMargin:'-38% 0px -42% 0px'}).observe(sec);
+    });
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────────── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ─── HERO SLIDESHOW ─────────────────────────────────────────── */
+    const heroSlides = [...document.querySelectorAll('.hero-slide')];
+    let heroIdx = 0;
+    setInterval(() => {
+      heroSlides[heroIdx].classList.remove('active');
+      heroIdx = (heroIdx + 1) % heroSlides.length;
+      heroSlides[heroIdx].classList.add('active');
+    }, 5600);
+
+    /* ─── LUXURY SLIDER CLASS ────────────────────────────────────── */
+    class LuxurySlider {
+      constructor(wrapper) {
+        this.wrapper = wrapper;
+        this.track = wrapper.querySelector('.slider-track');
+        this.controlsWrap = wrapper.parentElement.querySelector('.slider-controls');
+        this.prevBtn = this.controlsWrap.querySelector('.slider-prev');
+        this.nextBtn = this.controlsWrap.querySelector('.slider-next');
+        this.progressBar = this.controlsWrap.querySelector('.slider-progress-bar');
+        this.currentEl = this.controlsWrap.querySelector('.slider-current');
+        this.dragging = false;
+        this.startX = 0;
+        this.prevTranslate = 0;
+        this.currentTranslate = 0;
+        this.timer = null;
+        this.hovering = false;
+        this.index = 1;
+
+        // Build clones for infinite loop
+        this.origSlides = [...this.track.querySelectorAll('.slide')];
+        this.total = this.origSlides.length;
+
+        const firstClone = this.origSlides[0].cloneNode(true);
+        const lastClone = this.origSlides[this.total - 1].cloneNode(true);
+        firstClone.classList.add('clone');
+        lastClone.classList.add('clone');
+        this.track.insertBefore(lastClone, this.origSlides[0]);
+        this.track.appendChild(firstClone);
+        this.slides = [...this.track.querySelectorAll('.slide')];
+
+        this.setWidths();
+        this.jumpTo(1, false);
+        this.updateUI();
+        this.attachEvents();
+        this.startAuto();
+      }
+
+      get slideWidth() { return this.wrapper.clientWidth; }
+
+      setWidths() {
+        this.slides.forEach(s => s.style.width = this.wrapper.clientWidth + 'px');
+        this.jumpTo(this.index, false);
+      }
+
+      jumpTo(index, animate = true) {
+        this.index = index;
+        this.track.style.transition = animate ? 'transform .9s cubic-bezier(.22,.61,.36,1)' : 'none';
+        this.currentTranslate = -this.slideWidth * index;
+        this.prevTranslate = this.currentTranslate;
+        this.track.style.transform = `translate3d(${this.currentTranslate}px,0,0)`;
+      }
+
+      next() {
+        if (this.dragging) return;
+        this.jumpTo(this.index + 1, true);
+        this.resetProgress();
+      }
+
+      prev() {
+        if (this.dragging) return;
+        this.jumpTo(this.index - 1, true);
+        this.resetProgress();
+      }
+
+      normalize() {
+        if (this.index === 0) this.jumpTo(this.total, false);
+        else if (this.index === this.total + 1) this.jumpTo(1, false);
+        this.updateUI();
+      }
+
+      updateUI() {
+        let d = this.index;
+        if (d === 0) d = this.total;
+        if (d === this.total + 1) d = 1;
+        this.currentEl.textContent = String(d).padStart(2, '0');
+      }
+
+      startAuto() {
+        this.stopAuto();
+        this.animateProgress();
+        this.timer = setInterval(() => {
+          if (!this.hovering && !document.hidden && !body.classList.contains('modal-open'))
+            this.next();
+        }, 5000);
+      }
+
+      stopAuto() {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+
+      animateProgress() {
+        this.progressBar.style.transition = 'none';
+        this.progressBar.style.width = '0%';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          this.progressBar.style.transition = 'width 5s linear';
+          this.progressBar.style.width = '100%';
+        }));
+      }
+
+      resetProgress() { this.animateProgress(); }
+
+      attachEvents() {
+        this.nextBtn.addEventListener('click', () => this.next());
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.track.addEventListener('transitionend', () => this.normalize());
+        this.wrapper.addEventListener('mouseenter', () => { this.hovering = true; this.stopAuto(); });
+        this.wrapper.addEventListener('mouseleave', () => { this.hovering = false; this.startAuto(); });
+        window.addEventListener('resize', () => this.setWidths());
+
+        const down = (x) => {
+          this.dragging = true;
+          this.startX = x;
+          this.track.classList.add('dragging');
+          this.stopAuto();
+        };
+        const move = (x) => {
+          if (!this.dragging) return;
+          this.currentTranslate = this.prevTranslate + (x - this.startX);
+          this.track.style.transform = `translate3d(${this.currentTranslate}px,0,0)`;
+        };
+        const up = () => {
+          if (!this.dragging) return;
+          this.dragging = false;
+          this.track.classList.remove('dragging');
+          const moved = this.currentTranslate - this.prevTranslate;
+          if (moved < -60) this.index++;
+          if (moved > 60) this.index--;
+          this.jumpTo(this.index, true);
+          this.updateUI();
+          this.startAuto();
+        };
+
+        this.wrapper.addEventListener('mousedown', (e) => { if (!e.target.closest('.view-btn')) down(e.pageX); });
+        window.addEventListener('mousemove', (e) => move(e.pageX));
+        window.addEventListener('mouseup', up);
+        this.wrapper.addEventListener('touchstart', (e) => { if (!e.target.closest('.view-btn')) down(e.touches[0].clientX); }, {passive: true});
+        this.wrapper.addEventListener('touchmove', (e) => move(e.touches[0].clientX), {passive: true});
+        this.wrapper.addEventListener('touchend', up);
+
+        // Open lightbox on image or button click
+        this.origSlides.forEach((slide, idx) => {
+          const gallery = this.wrapper.dataset.slider;
+          const openFn = () => openModal(gallery, idx);
+          slide.querySelector('img').addEventListener('click', openFn);
+          slide.querySelector('.view-btn').addEventListener('click', openFn);
+        });
+
+        // Also handle clones
+        this.track.querySelectorAll('.clone').forEach(clone => {
+          const gallery = this.wrapper.dataset.slider;
+          const origIdx = parseInt(clone.querySelector('.view-btn').dataset.index || '0');
+          clone.querySelector('.view-btn').addEventListener('click', () => openModal(gallery, origIdx));
+          clone.querySelector('img').addEventListener('click', () => openModal(gallery, origIdx));
+        });
+      }
+    }
+
+    const sliders = {};
+    document.querySelectorAll('.slider').forEach(el => {
+      sliders[el.dataset.slider] = new LuxurySlider(el);
+    });
+
+    /* ─── LIGHTBOX / MODAL ───────────────────────────────────────── */
+    const modal = document.getElementById('lightbox');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalImage = document.getElementById('modalImage');
+    const modalClose = document.getElementById('modalClose');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+    const modalCounter = document.getElementById('modalCounter');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const modalMedia = document.getElementById('modalMedia');
+
+    let currentGallery = 'stores';
+    let currentIdx = 0;
+
+    function preload() {
+      const items = GALLERY[currentGallery];
+      [
+        (currentIdx - 1 + items.length) % items.length,
+        (currentIdx + 1) % items.length
+      ].forEach(i => { const img = new Image(); img.src = items[i].src; });
+    }
+
+    function renderModal() {
+      const items = GALLERY[currentGallery];
+      const item = items[currentIdx];
+      modalImage.src = item.src;
+      modalImage.alt = item.title;
+      modalTitle.textContent = item.title;
+      modalText.textContent = item.text;
+      modalCounter.textContent = `${String(currentIdx + 1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`;
+      preload();
+    }
+
+    function openModal(gallery, index) {
+      currentGallery = gallery;
+      currentIdx = index;
+      renderModal();
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      body.classList.add('modal-open');
+      Object.values(sliders).forEach(s => s.stopAuto());
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      body.classList.remove('modal-open');
+      Object.values(sliders).forEach(s => s.startAuto());
+    }
+
+    function nextModal() {
+      currentIdx = (currentIdx + 1) % GALLERY[currentGallery].length;
+      renderModal();
+    }
+
+    function prevModal() {
+      currentIdx = (currentIdx - 1 + GALLERY[currentGallery].length) % GALLERY[currentGallery].length;
+      renderModal();
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    modalNext.addEventListener('click', nextModal);
+    modalPrev.addEventListener('click', prevModal);
+
+    window.addEventListener('keydown', e => {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextModal();
+      if (e.key === 'ArrowLeft') prevModal();
+    });
+
+    let mStartX = 0, mEndX = 0;
+    modalMedia.addEventListener('touchstart', e => { mStartX = e.touches[0].clientX; }, {passive: true});
+    modalMedia.addEventListener('touchmove', e => { mEndX = e.touches[0].clientX; }, {passive: true});
+    modalMedia.addEventListener('touchend', () => {
+      const d = mEndX - mStartX;
+      if (d > 60) prevModal();
+      if (d < -60) nextModal();
+      mStartX = mEndX = 0;
+    });
+
+    // Pause sliders when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) Object.values(sliders).forEach(s => s.stopAuto());
+      else if (!body.classList.contains('modal-open')) Object.values(sliders).forEach(s => s.startAuto());
+    });
+
+    // ESC closes mobile menu too
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+    });
+
+  })();
+  </script>
+</body>
+</html>
