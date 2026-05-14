@@ -100,7 +100,11 @@
 #panorama360 {
   width: 100%;
   height: 100%;
+  min-height: 500px;
+  position: absolute;
+  inset: 0;
 }
+    
 .hint-360 {
   position: absolute;
   bottom: 24px;
@@ -703,9 +707,9 @@
       .reveal{opacity:1;transform:none}
     }
   </style>
-  <!-- Add inside <head>, before </head> -->
+  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js">
   
 </head>
 <body>
@@ -1435,8 +1439,16 @@ slide.querySelector('.view-btn').addEventListener('click', openFn);
         this.track.querySelectorAll('.clone').forEach(clone => {
           const gallery = this.wrapper.dataset.slider;
           const origIdx = parseInt(clone.querySelector('.view-btn').dataset.index || '0');
-          clone.querySelector('.view-btn').addEventListener('click', () => openModal(gallery, origIdx));
-          clone.querySelector('img').addEventListener('click', () => openModal(gallery, origIdx));
+          clone.querySelector('.view-btn').addEventListener('click', () => {
+            const item = GALLERY[gallery][origIdx];
+            if (item.is360) open360(item.src);
+            else openModal(gallery, origIdx);
+          });
+          clone.querySelector('img').addEventListener('click', () => {
+            const item = GALLERY[gallery][origIdx];
+            if (item.is360) open360(item.src);
+            else openModal(gallery, origIdx);
+          });
         });
       }
     }
