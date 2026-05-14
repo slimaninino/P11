@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>MadameArchitect — Architecture, Interiors, Branding, Development, Installation</title>
   <meta name="description" content="MadameArchitect is a luxury architecture and interior design studio crafting refined spaces through architecture, branding, development, and installation." />
-<!-- FAVICON = same as logo -->
-<link rel="icon" type="image/png" href="logo.png" />
-<link rel="apple-touch-icon" href="logo.png" />
-<meta name="msapplication-TileImage" content="Logo.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="Logo.png" />
+  <link rel="apple-touch-icon" href="Logo.png" />
+  <meta name="msapplication-TileImage" content="Logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <!-- FIX: Pannellum CSS loaded in <head> before any JS runs -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
   <style>
     :root{
       --bg:#0b0b0a;
@@ -29,134 +30,70 @@
       --serif:"Cormorant Garamond","Times New Roman",Georgia,serif;
       --sans:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     }
-    /* Cormorant optical refinements */
-    h1, h2, h3, h4,
-    .section-title,
-    .quote-text,
-    .hero h1,
-    .service-card h3,
-    .timeline-card h3,
-    .editorial-card h3,
-    .modal-caption h4,
-    .slide-caption h4 {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-style: normal;
-      letter-spacing: -.03em;
+    h1,h2,h3,h4,.section-title,.quote-text,.hero h1,.service-card h3,
+    .timeline-card h3,.editorial-card h3,.modal-caption h4,.slide-caption h4{
+      font-family:var(--serif);font-weight:300;font-style:normal;letter-spacing:-.03em;
     }
-
-    /* DM Sans body refinements */
-    body, p, a, button, span, li, small, .btn, .tag, .eyebrow,
-    .nav-links a, .ghost-btn, .contact-row, .lead {
-      font-family: var(--sans);
-      font-weight: 300;
+    body,p,a,button,span,li,small,.btn,.tag,.eyebrow,
+    .nav-links a,.ghost-btn,.contact-row,.lead{
+      font-family:var(--sans);font-weight:300;
     }
-
-    .btn.primary, .btn.secondary, strong, .brand-text strong {
-      font-weight: 400;
-    }
-
+    .btn.primary,.btn.secondary,strong,.brand-text strong{font-weight:400;}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;font-family:var(--sans);
       background:linear-gradient(180deg,#0a0a09 0%,#11110f 45%,#0d0d0c 100%);
-      color:var(--text);overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
+      color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;
     }
     body.menu-open,body.modal-open{overflow:hidden}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block;user-select:none;-webkit-user-drag:none}
     button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
-
     .noise{
       position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:2;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
       background-size:200px 200px;mix-blend-mode:soft-light;
     }
-/* 360 VIEWER */
-.modal-360 {
-  position: fixed;
-  inset: 0;
-  z-index: 2100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .4s var(--ease);
-}
-.modal-360.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-.viewer-wrap {
-  position: relative;
-  width: min(1400px, 100%);
-  height: min(88vh, 900px);
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.1);
-  box-shadow: 0 40px 120px rgba(0,0,0,.55);
-  background: #0b0b0a;
-}
-#panorama360 {
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  position: absolute;
-  inset: 0;
-}
-    
-.hint-360 {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,.1);
-  color: rgba(243,238,230,.8);
-  font-size: .76rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  pointer-events: none;
-  animation: fadeHint 3s ease 1.5s forwards;
-}
-@keyframes fadeHint {
-  0%   { opacity: 1 }
-  100% { opacity: 0 }
-}
-/* reuse .modal-close and .modal-backdrop styles already defined */
-.modal-360 .modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(10px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.modal-360 .modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(3,3,3,.82);
-  backdrop-filter: blur(14px);
-  z-index: -1;
-}
+    /* 360 VIEWER */
+    .modal-360{
+      position:fixed;inset:0;z-index:2100;
+      display:flex;align-items:center;justify-content:center;padding:20px;
+      opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+    }
+    .modal-360.open{opacity:1;pointer-events:auto;}
+    .viewer-wrap{
+      position:relative;width:min(1400px,100%);height:min(88vh,900px);
+      border-radius:28px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:0 40px 120px rgba(0,0,0,.55);background:#0b0b0a;
+    }
+    /* FIX: explicit positioning so Pannellum renders at correct pixel size */
+    #panorama360{
+      width:100%;height:100%;min-height:500px;
+      position:absolute;inset:0;
+    }
+    .hint-360{
+      position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+      display:flex;align-items:center;gap:8px;padding:10px 18px;
+      border-radius:999px;background:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);
+      color:rgba(243,238,230,.8);font-size:.76rem;letter-spacing:.14em;
+      text-transform:uppercase;pointer-events:none;
+      animation:fadeHint 3s ease 1.5s forwards;z-index:5;
+    }
+    @keyframes fadeHint{0%{opacity:1}100%{opacity:0}}
+    .modal-360 .modal-close{
+      position:absolute;top:16px;right:16px;z-index:10;
+      width:48px;height:48px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);display:inline-flex;
+      align-items:center;justify-content:center;cursor:pointer;
+    }
+    .modal-360 .modal-backdrop{
+      position:absolute;inset:0;background:rgba(3,3,3,.82);
+      backdrop-filter:blur(14px);z-index:-1;
+    }
     /* NAV */
     .nav{
       position:fixed;top:0;left:0;width:100%;height:var(--nav-h);z-index:1000;
@@ -174,20 +111,17 @@
       display:flex;align-items:center;justify-content:space-between;gap:20px;
     }
     .brand{display:flex;align-items:center;gap:14px}
-
-.brand-logo-img {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1); /* makes it white on dark nav */
-  transition: opacity .3s var(--ease), filter .3s var(--ease);
-  flex: 0 0 auto;
-}
-
-/* On scroll when nav darkens, keep it crisp */
-.nav.scrolled .brand-logo-img {
-  filter: brightness(0) invert(1);
-}
+    /* FIX: removed redundant .brand-logo wrapper div */
+    .brand-logo-img{
+      height:48px;width:auto;object-fit:contain;
+      filter:brightness(0) invert(1);
+      transition:opacity .3s var(--ease),filter .3s var(--ease);flex:0 0 auto;
+    }
+    .nav.scrolled .brand-logo-img{filter:brightness(0) invert(1);}
+    .brand-text strong{
+      display:block;font-family:var(--serif);font-weight:400;
+      letter-spacing:.03em;font-size:1.05rem;white-space:nowrap;
+    }
     .brand-text span{
       display:block;color:var(--muted);font-size:.7rem;
       letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;
@@ -217,8 +151,7 @@
     }
     .ghost-btn:hover{
       transform:translateY(-1px);
-      border-color:rgba(255,255,255,.28);
-      background:rgba(255,255,255,.08);
+      border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.08);
     }
     .menu-toggle{
       display:none;width:52px;height:52px;border-radius:50%;
@@ -260,7 +193,6 @@
       font-size:1rem;letter-spacing:.12em;text-transform:uppercase;
     }
     .mobile-links a span:last-child{color:var(--muted);font-size:.8rem}
-
     /* MAIN */
     main{position:relative;z-index:3}
     section{position:relative;padding:120px 0;scroll-margin-top:calc(var(--nav-h) + 18px)}
@@ -271,7 +203,6 @@
       letter-spacing:.24em;font-size:.72rem;margin-bottom:20px;
     }
     .eyebrow::before{content:"";width:34px;height:1px;background:rgba(255,255,255,.18)}
-
     /* HERO */
     .hero{
       min-height:100svh;min-height:100vh;
@@ -327,9 +258,7 @@
       background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
       backdrop-filter:blur(14px);box-shadow:var(--shadow);
     }
-    .hero-side .meta{
-      display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-top:20px;
-    }
+    .hero-side .meta{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-top:20px;}
     .meta-card small{
       display:block;color:var(--muted);text-transform:uppercase;
       letter-spacing:.16em;font-size:.64rem;margin-bottom:8px;
@@ -341,125 +270,73 @@
       color:rgba(255,255,255,.7);font-size:.72rem;
       letter-spacing:.18em;text-transform:uppercase;
     }
-    .scroll-line{
-      width:52px;height:1px;background:rgba(255,255,255,.28);
-      overflow:hidden;position:relative;
-    }
+    .scroll-line{width:52px;height:1px;background:rgba(255,255,255,.28);overflow:hidden;position:relative;}
     .scroll-line::after{
       content:"";position:absolute;left:-100%;top:0;
       width:100%;height:100%;background:#fff;
       animation:scrollLine 2.2s infinite ease-in-out;
     }
     @keyframes scrollLine{0%{left:-100%}100%{left:100%}}
-
-    /* SPLIT LAYOUT */
+    /* SPLIT */
     .split{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:end}
     .section-title{
       font-family:var(--serif);font-weight:400;
       font-size:clamp(2.1rem,4.4vw,4.4rem);line-height:1.02;
       letter-spacing:-.03em;margin:0 0 16px;
     }
-    .lead{
-      margin:0;color:rgba(243,238,230,.8);
-      font-size:1.02rem;line-height:1.9;max-width:64ch;
-    }
+    .lead{margin:0;color:rgba(243,238,230,.8);font-size:1.02rem;line-height:1.9;max-width:64ch;}
     .note-card{
       padding:28px;border-radius:24px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
       color:rgba(243,238,230,.8);box-shadow:var(--shadow);
     }
     .note-card p{margin:0;line-height:1.85}
-
     /* SERVICE GRID */
-    .services-grid{
-      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:18px;margin-top:42px;
-    }
+    .services-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:42px;}
     .service-card{
       min-height:260px;padding:26px;border-radius:24px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
       transition:transform .45s var(--ease),border-color .45s var(--ease);
     }
     .service-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.16)}
-    .service-index{
-      color:var(--soft);font-size:.74rem;letter-spacing:.18em;
-      text-transform:uppercase;margin-bottom:22px;display:block;
-    }
-    .service-card h3{
-      margin:0 0 14px;font-family:var(--serif);
-      font-weight:400;font-size:1.95rem;letter-spacing:-.03em;
-    }
+    .service-index{color:var(--soft);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px;display:block;}
+    .service-card h3{margin:0 0 14px;font-family:var(--serif);font-weight:400;font-size:1.95rem;letter-spacing:-.03em;}
     .service-card p{margin:0;color:rgba(243,238,230,.76);line-height:1.8;font-size:.94rem}
-
     /* QUOTE */
     .quote-block{
-      margin-top:40px;padding:40px 0 0;
-      border-top:1px solid rgba(255,255,255,.08);
+      margin-top:40px;padding:40px 0 0;border-top:1px solid rgba(255,255,255,.08);
       display:grid;grid-template-columns:.65fr 1.35fr;gap:28px;align-items:start;
     }
-    .quote-label{
-      color:var(--muted);text-transform:uppercase;
-      letter-spacing:.2em;font-size:.72rem;padding-top:12px;
-    }
+    .quote-label{color:var(--muted);text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;padding-top:12px;}
     .quote-text{
       margin:0;font-family:var(--serif);
-      font-size:clamp(1.7rem,3.2vw,3.3rem);
-      line-height:1.14;letter-spacing:-.03em;max-width:17ch;
+      font-size:clamp(1.7rem,3.2vw,3.3rem);line-height:1.14;letter-spacing:-.03em;max-width:17ch;
     }
-
-    /* EDITORIAL GRID */
-    .editorial-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:42px;
-    }
+    /* EDITORIAL */
+    .editorial-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:42px;}
     .editorial-card{
-      padding:30px;border-radius:26px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      min-height:280px;display:flex;flex-direction:column;
-      justify-content:space-between;
+      padding:30px;border-radius:26px;background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);min-height:280px;
+      display:flex;flex-direction:column;justify-content:space-between;
     }
-    .editorial-card h3{
-      margin:0 0 14px;font-family:var(--serif);
-      font-size:1.95rem;font-weight:400;letter-spacing:-.03em;
-    }
-    .editorial-card p{
-      margin:0;line-height:1.85;
-      color:rgba(243,238,230,.78);max-width:50ch;
-    }
+    .editorial-card h3{margin:0 0 14px;font-family:var(--serif);font-size:1.95rem;font-weight:400;letter-spacing:-.03em;}
+    .editorial-card p{margin:0;line-height:1.85;color:rgba(243,238,230,.78);max-width:50ch;}
     .editorial-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
     .tag{
-      padding:9px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);
+      padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);
       background:rgba(255,255,255,.04);color:var(--muted);
       font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
     }
-
     /* TIMELINE */
-    .timeline{
-      margin-top:46px;display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;
-    }
-    .timeline-card{
-      padding:24px;border-radius:22px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);min-height:250px;
-    }
+    .timeline{margin-top:46px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;}
+    .timeline-card{padding:24px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);min-height:250px;}
     .timeline-card .num{
-      display:inline-flex;width:44px;height:44px;align-items:center;
-      justify-content:center;border:1px solid rgba(255,255,255,.14);
-      border-radius:50%;color:var(--beige);font-size:.76rem;
-      letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;
+      display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.14);border-radius:50%;color:var(--beige);
+      font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;
     }
-    .timeline-card h3{
-      margin:0 0 12px;font-family:var(--serif);
-      font-size:1.8rem;font-weight:400;letter-spacing:-.03em;
-    }
-    .timeline-card p{
-      margin:0;color:rgba(243,238,230,.76);line-height:1.8;font-size:.93rem;
-    }
-
+    .timeline-card h3{margin:0 0 12px;font-family:var(--serif);font-size:1.8rem;font-weight:400;letter-spacing:-.03em;}
+    .timeline-card p{margin:0;color:rgba(243,238,230,.76);line-height:1.8;font-size:.93rem;}
     /* WIDE MEDIA */
     .wide-media{
       margin-top:46px;border-radius:28px;overflow:hidden;
@@ -477,137 +354,75 @@
       background:linear-gradient(180deg,rgba(7,7,7,.16) 0%,rgba(7,7,7,.66) 100%);
       display:flex;align-items:flex-end;padding:32px;
     }
-    .wide-media .overlay h3{
-      margin:0;font-family:var(--serif);font-weight:400;
-      font-size:clamp(1.7rem,4vw,3.8rem);letter-spacing:-.03em;max-width:14ch;
-    }
-
+    .wide-media .overlay h3{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4vw,3.8rem);letter-spacing:-.03em;max-width:14ch;}
     /* PORTFOLIO */
     .portfolio-section{padding-top:90px}
-    .portfolio-category{
-      margin-top:56px;padding-top:12px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-    .portfolio-head{
-      display:flex;justify-content:space-between;align-items:end;
-      gap:24px;margin-bottom:24px;flex-wrap:wrap;
-    }
-    .portfolio-head h3{
-      margin:8px 0 0;font-family:var(--serif);font-weight:400;
-      font-size:clamp(1.8rem,3.2vw,3rem);letter-spacing:-.03em;
-    }
-    .portfolio-meta{
-      display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-      color:var(--muted);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
-    }
-
+    .portfolio-category{margin-top:56px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);}
+    .portfolio-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px;flex-wrap:wrap;}
+    .portfolio-head h3{margin:8px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.2vw,3rem);letter-spacing:-.03em;}
+    .portfolio-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;}
     /* SLIDER */
     .slider{
       position:relative;overflow:hidden;border-radius:28px;
       background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);touch-action:pan-y pinch-zoom;
     }
-    .slider-track{
-      display:flex;transition:transform .9s var(--ease);
-      will-change:transform;cursor:grab;
-    }
+    .slider-track{display:flex;transition:transform .9s var(--ease);will-change:transform;cursor:grab;}
     .slider-track.dragging{cursor:grabbing;transition:none}
-    .slide{
-      min-width:100%;position:relative;
-      height:clamp(340px,56vw,740px);overflow:hidden;background:#111;
-    }
+    .slide{min-width:100%;position:relative;height:clamp(340px,56vw,740px);overflow:hidden;background:#111;}
     .slide img{
-      width:100%;height:100%;object-fit:cover;
-      filter:brightness(.86) saturate(.94);
+      width:100%;height:100%;object-fit:cover;filter:brightness(.86) saturate(.94);
       transition:transform 1.8s var(--ease),filter .6s var(--ease);
     }
     .slide:hover img{transform:scale(1.03);filter:brightness(.95) saturate(1)}
     .slide-overlay{
       position:absolute;inset:0;
       background:linear-gradient(180deg,rgba(8,8,8,.02) 0%,rgba(8,8,8,.28) 55%,rgba(8,8,8,.62) 100%);
-      display:flex;align-items:flex-end;justify-content:space-between;
-      gap:20px;padding:28px;
+      display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:28px;
     }
-    .slide-caption h4{
-      margin:0 0 8px;font-family:var(--serif);font-weight:400;
-      font-size:clamp(1.25rem,2.1vw,2.1rem);letter-spacing:-.03em;
-    }
-    .slide-caption p{
-      margin:0;max-width:52ch;color:rgba(243,238,230,.78);
-      line-height:1.7;font-size:.94rem;
-    }
+    .slide-caption h4{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:clamp(1.25rem,2.1vw,2.1rem);letter-spacing:-.03em;}
+    .slide-caption p{margin:0;max-width:52ch;color:rgba(243,238,230,.78);line-height:1.7;font-size:.94rem;}
     .view-btn{
       min-width:100px;height:44px;padding:0 16px;border-radius:999px;
       border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);
       backdrop-filter:blur(10px);font-size:.72rem;letter-spacing:.16em;
-      text-transform:uppercase;transition:all .35s var(--ease);
+      text-transform:uppercase;transition:all .35s var(--ease);white-space:nowrap;
     }
     .view-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
-    .slider-controls{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;
-    }
-    .slider-progress{
-      flex:1;height:2px;background:rgba(255,255,255,.08);
-      position:relative;overflow:hidden;border-radius:999px;
-    }
+    .slider-controls{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;}
+    .slider-progress{flex:1;height:2px;background:rgba(255,255,255,.08);position:relative;overflow:hidden;border-radius:999px;}
     .slider-progress-bar{
       position:absolute;left:0;top:0;height:100%;width:0%;
-      background:linear-gradient(90deg,var(--sand),var(--accent));
-      transition:width 5s linear;
+      background:linear-gradient(90deg,var(--sand),var(--accent));transition:width 5s linear;
     }
-    .slider-indicators{
-      display:flex;align-items:center;gap:10px;
-      color:var(--muted);font-size:.74rem;letter-spacing:.16em;
-      text-transform:uppercase;white-space:nowrap;
-    }
+    .slider-indicators{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;}
     .mini-controls{display:flex;align-items:center;gap:10px}
     .icon-btn{
       width:46px;height:46px;border-radius:50%;
       border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);
-      transition:all .35s var(--ease);display:inline-flex;
-      align-items:center;justify-content:center;
+      transition:all .35s var(--ease);display:inline-flex;align-items:center;justify-content:center;
     }
-    .icon-btn:hover{
-      background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);transform:translateY(-1px);
-    }
-
+    .icon-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);transform:translateY(-1px);}
     /* CONTACT */
     .contact-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;margin-top:40px}
-    .contact-card,.contact-list{
-      border-radius:28px;padding:30px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);box-shadow:var(--shadow);
-    }
+    .contact-card,.contact-list{border-radius:28px;padding:30px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);box-shadow:var(--shadow);}
     .contact-card p{margin:0;color:rgba(243,238,230,.82);line-height:1.9;max-width:60ch}
     .contact-list{display:grid;gap:12px;align-content:start}
-    .contact-row{
-      display:flex;justify-content:space-between;gap:16px;
-      padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);
-    }
+    .contact-row{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);}
     .contact-row:last-child{border-bottom:none}
-    .contact-row span:first-child{
-      color:var(--muted);text-transform:uppercase;
-      letter-spacing:.18em;font-size:.72rem;white-space:nowrap;
-    }
+    .contact-row span:first-child{color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;white-space:nowrap;}
     .contact-row span:last-child{color:#f5efe8;text-align:right;word-break:break-word}
-
     /* FOOTER */
     footer{padding:26px 0 50px;position:relative;z-index:3}
     .footer-inner{
       width:var(--container);margin:0 auto;padding-top:24px;
       border-top:1px solid rgba(255,255,255,.08);
       display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
-      color:rgba(243,238,230,.55);font-size:.8rem;
-      letter-spacing:.1em;text-transform:uppercase;
+      color:rgba(243,238,230,.55);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
     }
-
-    /* REVEAL ANIMATION */
-    .reveal{
-      opacity:0;transform:translateY(32px) scale(.98);
-      transition:opacity .9s var(--ease),transform .9s var(--ease);
-    }
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(32px) scale(.98);transition:opacity .9s var(--ease),transform .9s var(--ease);}
     .reveal.visible{opacity:1;transform:translateY(0) scale(1)}
-
     /* MODAL / LIGHTBOX */
     .modal{
       position:fixed;inset:0;z-index:2000;
@@ -615,68 +430,31 @@
       opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
     }
     .modal.open{opacity:1;pointer-events:auto}
-    .modal-backdrop{
-      position:absolute;inset:0;background:rgba(3,3,3,.82);
-      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    }
+    .modal-backdrop{position:absolute;inset:0;background:rgba(3,3,3,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
     .modal-content{
       position:relative;width:min(1400px,100%);height:min(90vh,980px);
       border-radius:28px;overflow:hidden;background:#0e0e0c;
-      border:1px solid rgba(255,255,255,.1);
-      box-shadow:0 40px 120px rgba(0,0,0,.55);
-      transform:translateY(16px) scale(.985);
-      transition:transform .45s var(--ease);
+      border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.55);
+      transform:translateY(16px) scale(.985);transition:transform .45s var(--ease);
     }
     .modal.open .modal-content{transform:translateY(0) scale(1)}
-    .modal-media{
-      width:100%;height:100%;position:relative;
-      touch-action:pan-y pinch-zoom;
-    }
+    .modal-media{width:100%;height:100%;position:relative;touch-action:pan-y pinch-zoom;}
     .modal-media img{width:100%;height:100%;object-fit:contain;background:#0b0b0a}
-    .modal-top{
-      position:absolute;top:16px;left:16px;right:16px;
-      display:flex;justify-content:space-between;align-items:center;
-      gap:16px;z-index:5;pointer-events:none;
-    }
+    .modal-top{position:absolute;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;gap:16px;z-index:5;pointer-events:none;}
     .modal-top > *{pointer-events:auto}
-    .modal-counter{
-      padding:10px 16px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.07);backdrop-filter:blur(10px);
-      font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
-    }
-    .modal-close{
-      width:48px;height:48px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.07);backdrop-filter:blur(10px);
-      font-size:1.1rem;
-    }
-    .modal-nav{
-      position:absolute;inset:0;display:flex;
-      align-items:center;justify-content:space-between;
-      padding:0 16px;pointer-events:none;
-    }
-    .modal-nav .icon-btn{
-      width:58px;height:58px;background:rgba(255,255,255,.07);
-      backdrop-filter:blur(10px);pointer-events:auto;
-    }
+    .modal-counter{padding:10px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;}
+    .modal-close{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);backdrop-filter:blur(10px);font-size:1.1rem;display:inline-flex;align-items:center;justify-content:center;}
+    .modal-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 16px;pointer-events:none;}
+    .modal-nav .icon-btn{width:58px;height:58px;background:rgba(255,255,255,.07);backdrop-filter:blur(10px);pointer-events:auto;}
     .modal-caption{
       position:absolute;left:20px;right:20px;bottom:20px;
       display:flex;justify-content:space-between;gap:20px;align-items:end;
-      padding:18px 20px;border-radius:22px;
-      background:rgba(255,255,255,.06);
+      padding:18px 20px;border-radius:22px;background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);
     }
-    .modal-caption h4{
-      margin:0 0 6px;font-family:var(--serif);
-      font-size:1.6rem;font-weight:400;letter-spacing:-.03em;
-    }
+    .modal-caption h4{margin:0 0 6px;font-family:var(--serif);font-size:1.6rem;font-weight:400;letter-spacing:-.03em;}
     .modal-caption p{margin:0;color:rgba(243,238,230,.75);font-size:.92rem;line-height:1.7}
-    .modal-hint{
-      color:var(--muted);font-size:.7rem;
-      letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;
-    }
-
+    .modal-hint{color:var(--muted);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;}
     /* RESPONSIVE */
     @media(max-width:1100px){
       .nav-links,.ghost-btn{display:none}
@@ -704,6 +482,7 @@
       .modal-caption{left:10px;right:10px;bottom:10px;flex-direction:column;align-items:flex-start}
       .modal-caption h4{font-size:1.15rem}
       .footer-inner{flex-direction:column}
+      .viewer-wrap{height:min(85vh,600px);border-radius:16px;}
     }
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
@@ -711,22 +490,18 @@
       .reveal{opacity:1;transform:none}
     }
   </style>
-  
-
-  
 </head>
 <body>
   <div class="noise"></div>
 
   <header class="nav" id="navbar">
     <div class="nav-inner">
+      <!-- FIX: removed unnecessary .brand-logo wrapper div -->
       <a href="#home" class="brand" aria-label="MadameArchitect home">
-        <div class="brand-logo">
-          <img src="Logo.png" alt="MadameArchitect logo" class="brand-logo-img" />
-        </div>
+        <img src="Logo.png" alt="MadameArchitect logo" class="brand-logo-img" />
         <div class="brand-text">
           <strong>MadameArchitect</strong>
-          <span>Creative / Devolepment / Installation</span>
+          <span>Creative / Development / Installation</span>
         </div>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
@@ -735,11 +510,11 @@
         <a href="#develop">Develop</a>
         <a href="#installation">Install</a>
         <a href="#branding">Branding</a>
-        <a href="#portfolio">Portfolio</a>
+        <a href="#portfolio">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
       <div style="display:flex;align-items:center;gap:14px">
-        <a href="#portfolio" class="ghost-btn">View Portfolio</a>
+        <a href="#portfolio" class="ghost-btn">View Projects</a>
         <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -756,7 +531,7 @@
         <a href="#develop"><span>Develop</span><span>03</span></a>
         <a href="#installation"><span>Install</span><span>04</span></a>
         <a href="#branding"><span>Branding</span><span>05</span></a>
-        <a href="#portfolio"><span>Portfolio</span><span>06</span></a>
+        <a href="#portfolio"><span>Projects</span><span>06</span></a>
         <a href="#contact"><span>Contact</span><span>07</span></a>
       </nav>
     </aside>
@@ -770,7 +545,7 @@
         <div class="hero-slides" id="heroSlides">
           <div class="hero-slide active"><img src="residential/Resedential_1.webp" alt="Residential cinematic hero" /></div>
           <div class="hero-slide"><img src="commercial/Commercial_1.webp" alt="Commercial space hero" /></div>
-          <div class="hero-slide"><img src="store/store_1.webp" alt="C-Store interior hero" /></div>
+          <div class="hero-slide"><img src="store/store_1.webp" alt="Store interior hero" /></div>
           <div class="hero-slide"><img src="residential/Resedential_5.webp" alt="Residential luxury hero" /></div>
         </div>
       </div>
@@ -781,7 +556,7 @@
           <h1>Spaces designed with calm, precision, and presence.</h1>
           <p>MadameArchitect creates refined environments where architecture, interior design, branding, development, and installation move as one—crafted through atmosphere, material clarity, and a cinematic sense of restraint.</p>
           <div class="hero-ctas">
-            <a href="#portfolio" class="btn primary">View Portfolio</a>
+            <a href="#portfolio" class="btn primary">View Projects</a>
             <a href="#develop" class="btn secondary">Explore Process</a>
           </div>
         </div>
@@ -790,9 +565,9 @@
           <p style="margin:0;color:rgba(243,238,230,.82);line-height:1.85">A luxury architecture and interior design studio shaping residential, commercial, and retail spaces through editorial design language and disciplined execution.</p>
           <div class="meta">
             <div class="meta-card"><small>Services</small><strong>Creative Direction<br>Architecture<br>Interior Design</strong></div>
-            <div class="meta-card"><small>Delivery</small><strong>Development<br>Branding<br>Install</strong></div>
+            <div class="meta-card"><small>Delivery</small><strong>Development<br>Branding<br>Installation</strong></div>
             <div class="meta-card"><small>Approach</small><strong>Minimal Luxury<br>Warm Modernism</strong></div>
-            <div class="meta-card"><small>Focus</small><strong>C-Stores<br>Commercial<br>Residential</strong></div>
+            <div class="meta-card"><small>Focus</small><strong>Stores<br>Commercial<br>Residential</strong></div>
           </div>
         </div>
       </div>
@@ -870,7 +645,7 @@
         </div>
         <div class="timeline">
           <article class="timeline-card reveal"><div class="num">01</div><h3>Brief</h3><p>We define ambition, context, function, emotional direction, and design priorities with precision from the beginning.</p></article>
-          <article class="timeline-card reveal"><div class="num">02</div><h3>Research</h3><p>Site conditions, references, use patterns, spatial opportunities, and constraints are studied to establish the project's logic.</p></article>
+          <article class="timeline-card reveal"><div class="num">02</div><h3>Research</h3><p>Site conditions, references, use patterns, spatial opportunities, and constraints are studied to establish the project&#39;s logic.</p></article>
           <article class="timeline-card reveal"><div class="num">03</div><h3>Strategy</h3><p>Circulation, hierarchy, volume, scale, and balance are organized into a coherent architectural framework.</p></article>
           <article class="timeline-card reveal"><div class="num">04</div><h3>Detail</h3><p>Material coordination, technical alignment, and construction intent are refined so the concept remains exact.</p></article>
           <article class="timeline-card reveal"><div class="num">05</div><h3>Delivery</h3><p>The project is prepared for execution through consistency, control, and a continuous link between design and outcome.</p></article>
@@ -947,20 +722,20 @@
       <div class="section-shell">
         <div class="split reveal">
           <div>
-            <div class="eyebrow">Portfolio</div>
-            <h2 class="section-title">C-Stores, commercial environments, and residential spaces.</h2>
+            <div class="eyebrow">Projects</div>
+            <h2 class="section-title">Stores, commercial environments, and residential spaces.</h2>
             <p class="lead">Click any image to open fullscreen. Drag or swipe through each category. All 37 projects across three collections are presented here as an immersive sliding gallery.</p>
           </div>
           <div class="note-card">
-            <p>Images load from the <code style="opacity:.7;font-size:.9em"> Residential </code>, <code style="opacity:.7;font-size:.9em">Commercial </code>, and <code style="opacity:.7;font-size:.9em">C-Store </code> folders placed alongside this HTML file. Add or remove images from those folders and update the count in the JavaScript gallery arrays.</p>
+            <p>Images load from the <code style="opacity:.7;font-size:.9em">residential/</code>, <code style="opacity:.7;font-size:.9em">commercial/</code>, and <code style="opacity:.7;font-size:.9em">store/</code> folders. The third store image opens as a 360&deg; panorama viewer.</p>
           </div>
         </div>
 
         <!-- STORES SLIDER -->
         <div class="portfolio-category reveal">
           <div class="portfolio-head">
-            <div><div class="eyebrow">Category 01</div><h3>C-Stores</h3></div>
-            <div class="portfolio-meta"><span>5 Projects</span><span>Auto </span><span>Drag + Swipe</span></div>
+            <div><div class="eyebrow">Category 01</div><h3>Stores</h3></div>
+            <div class="portfolio-meta"><span>5 Projects</span><span>Auto / 5s</span><span>Drag + Swipe</span></div>
           </div>
           <div class="slider" data-slider="stores" data-total="5">
             <div class="slider-track" id="track-stores"></div>
@@ -1047,10 +822,10 @@
             <p>Whether the project is residential, retail, commercial, or brand-led, each engagement begins with a conversation about atmosphere, purpose, visual identity, and the level of execution required to deliver a space with lasting presence.</p>
           </div>
           <div class="contact-list reveal">
-            <div class="contact-row"><span>Email</span><span>@madamearchitects.com</span></div>
-            <div class="contact-row"><span>Instagram</span><span>@madamearchitects.com</span></div>
-            <div class="contact-row"><span>WhatsApp</span><span>@madamearchitects.com</span></div>
-            <div class="contact-row"><span>Office</span><span>@madamearchitects.com</span></div>
+            <div class="contact-row"><span>Email</span><span>hello@madamearchitects.com</span></div>
+            <div class="contact-row"><span>Instagram</span><span>@madamearchitects</span></div>
+            <div class="contact-row"><span>WhatsApp</span><span>+36 00 000 0000</span></div>
+            <div class="contact-row"><span>Office</span><span>Budapest, Hungary</span></div>
           </div>
         </div>
       </div>
@@ -1093,48 +868,38 @@
         </div>
         <div class="modal-hint">Swipe / Arrows / Esc</div>
       </div>
-
-      <!-- 360 VIEWER MODAL — add right after closing </div> of modal-content -->
-<div class="modal-360" id="modal360" aria-hidden="true">
-  <div class="modal-backdrop"></div>
-  <div class="viewer-wrap">
-    <button class="modal-close" id="close360" aria-label="Close 360 view">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div id="panorama360"></div>
-    <div class="hint-360">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      Drag to explore 360°
     </div>
   </div>
-</div>
 
-      
+  <!-- FIX: 360 modal moved to body level — outside lightbox modal entirely -->
+  <div class="modal-360" id="modal360" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="viewer-wrap">
+      <button class="modal-close" id="close360" aria-label="Close 360 view">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="panorama360"></div>
+      <div class="hint-360">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Drag to explore 360&deg;
+      </div>
     </div>
   </div>
+
+  <!-- FIX: Pannellum JS loaded BEFORE main script so pannellum global exists -->
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
   <script>
-    
   (() => {
     'use strict';
 
-    /* ─── GALLERY DATA ──────────────────────────────────────────────
-       HOW TO UPDATE IMAGE COUNT:
-       - Change the count number (e.g. buildGallery('residential', 25))
-       - Make sure images in the folder are named:
-           residential/Resedential_1.png, Resedential_2.png ... Resedential_25.png
-           commercial/Commercial_1.png ... Commercial_7.png
-           store/store_1.png ... store_5.png
-    ─────────────────────────────────────────────────────────────── */
-
+    /* ─── GALLERY DATA ──────────────────────────────────────────── */
     function buildGallery(key, count) {
       const configs = {
         residential: {
-          folder: 'residential',
-          prefix: 'Resedential_',
-          label: 'Residential',
+          folder: 'residential', prefix: 'Resedential_', label: 'Residential',
           captions: [
             'Warm living architecture with softness, order, and a deeply composed interior tone.',
             'A tactile home environment balancing natural materials, silence, and visual depth.',
@@ -1149,9 +914,7 @@
           ]
         },
         commercial: {
-          folder: 'commercial',
-          prefix: 'Commercial_',
-          label: 'Commercial',
+          folder: 'commercial', prefix: 'Commercial_', label: 'Commercial',
           captions: [
             'A contemporary business environment with clear geometry and elevated material rhythm.',
             'Spatial branding and interior refinement meet within a composed corporate atmosphere.',
@@ -1163,9 +926,7 @@
           ]
         },
         store: {
-          folder: 'store',
-          prefix: 'store_',
-          label: 'C-Store',
+          folder: 'store', prefix: 'store_', label: 'Store',
           captions: [
             'Retail architecture shaped through clarity, premium restraint, and spatial identity.',
             'Warm modern surfaces and editorial composition for a refined branded environment.',
@@ -1178,11 +939,10 @@
       const cfg = configs[key];
       const items = [];
       for (let i = 1; i <= count; i++) {
-        const caption = cfg.captions[(i - 1) % cfg.captions.length];
         items.push({
           src: `${cfg.folder}/${cfg.prefix}${i}.webp`,
           title: cfg.label,
-          text: caption
+          text: cfg.captions[(i - 1) % cfg.captions.length]
         });
       }
       return items;
@@ -1194,31 +954,36 @@
       residential: buildGallery('residential', 25)
     };
 
-    /* ─── BUILD SLIDE HTML ───────────────────────────────────────── */
+    /* FIX: is360 flag set BEFORE buildSlides so HTML renders 360 badge correctly */
+    GALLERY.stores[2].is360 = true;
+
+    /* ─── BUILD SLIDE HTML ──────────────────────────────────────── */
     function buildSlides(galleryKey) {
       const track = document.getElementById('track-' + galleryKey);
       if (!track) return;
       const items = GALLERY[galleryKey];
-      track.innerHTML = items.map((item, i) => `
-        <article class="slide" data-index="${i}" data-gallery="${galleryKey}">
-          <img src="${item.src}" alt="${item.title}" loading="lazy" />
-          <div class="slide-overlay">
-            <div class="slide-caption">
-              <h4>${item.title}</h4>
-              <p>${item.text}</p>
+      track.innerHTML = items.map((item, i) => {
+        const badge = item.is360
+          ? '<span style="position:absolute;top:16px;left:16px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(255,255,255,.18);">360°</span>'
+          : '';
+        return `
+          <article class="slide" data-index="${i}" data-gallery="${galleryKey}">
+            <img src="${item.src}" alt="${item.title}" loading="lazy" />
+            ${badge}
+            <div class="slide-overlay">
+              <div class="slide-caption">
+                <h4>${item.title}</h4>
+                <p>${item.text}</p>
+              </div>
+              <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">${item.is360 ? 'View 360°' : 'Open'}</button>
             </div>
-            <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">Open</button>
-          </div>
-        </article>
-      `).join('');
+          </article>`;
+      }).join('');
     }
 
     buildSlides('stores');
     buildSlides('commercial');
     buildSlides('residential');
-    // 
-    GALLERY.stores[2].is360 = true;   // store_3.webp is index 2 (0-based)
-    GALLERY.stores[2].src = 'store/store_3.webp';
 
     /* ─── NAV ───────────────────────────────────────────────────── */
     const body = document.body;
@@ -1245,25 +1010,18 @@
     mobileBackdrop.addEventListener('click', closeMenu);
     mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-    /* ─── ACTIVE NAV LINKS ───────────────────────────────────────── */
+    /* FIX: removed dead .observe() call — single working observer for all sections */
     const navAnchors = [...document.querySelectorAll('.nav-links a')];
-    new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting)
-          navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
-      });
-    }, {rootMargin:'-40% 0px -45% 0px', threshold: 0}).observe;
-
     document.querySelectorAll('main section[id]').forEach(sec => {
       new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting)
             navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
         });
-      }, {rootMargin:'-38% 0px -42% 0px'}).observe(sec);
+      }, {rootMargin: '-38% 0px -42% 0px'}).observe(sec);
     });
 
-    /* ─── SCROLL REVEAL ──────────────────────────────────────────── */
+    /* ─── SCROLL REVEAL ─────────────────────────────────────────── */
     const revealObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1271,10 +1029,10 @@
           revealObs.unobserve(entry.target);
         }
       });
-    }, {threshold: 0.12});
+    }, {threshold: 0.1});
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    /* ─── HERO SLIDESHOW ─────────────────────────────────────────── */
+    /* ─── HERO SLIDESHOW ────────────────────────────────────────── */
     const heroSlides = [...document.querySelectorAll('.hero-slide')];
     let heroIdx = 0;
     setInterval(() => {
@@ -1283,30 +1041,29 @@
       heroSlides[heroIdx].classList.add('active');
     }, 5600);
 
-    /* ─── LUXURY SLIDER CLASS ────────────────────────────────────── */
+    /* ─── LUXURY SLIDER ─────────────────────────────────────────── */
     class LuxurySlider {
       constructor(wrapper) {
-        this.wrapper = wrapper;
-        this.track = wrapper.querySelector('.slider-track');
+        this.wrapper     = wrapper;
+        this.track       = wrapper.querySelector('.slider-track');
         this.controlsWrap = wrapper.parentElement.querySelector('.slider-controls');
-        this.prevBtn = this.controlsWrap.querySelector('.slider-prev');
-        this.nextBtn = this.controlsWrap.querySelector('.slider-next');
+        this.prevBtn     = this.controlsWrap.querySelector('.slider-prev');
+        this.nextBtn     = this.controlsWrap.querySelector('.slider-next');
         this.progressBar = this.controlsWrap.querySelector('.slider-progress-bar');
-        this.currentEl = this.controlsWrap.querySelector('.slider-current');
-        this.dragging = false;
-        this.startX = 0;
-        this.prevTranslate = 0;
+        this.currentEl   = this.controlsWrap.querySelector('.slider-current');
+        this.dragging    = false;
+        this.startX      = 0;
+        this.prevTranslate    = 0;
         this.currentTranslate = 0;
-        this.timer = null;
+        this.timer    = null;
         this.hovering = false;
-        this.index = 1;
+        this.index    = 1;
 
-        // Build clones for infinite loop
         this.origSlides = [...this.track.querySelectorAll('.slide')];
-        this.total = this.origSlides.length;
+        this.total      = this.origSlides.length;
 
         const firstClone = this.origSlides[0].cloneNode(true);
-        const lastClone = this.origSlides[this.total - 1].cloneNode(true);
+        const lastClone  = this.origSlides[this.total - 1].cloneNode(true);
         firstClone.classList.add('clone');
         lastClone.classList.add('clone');
         this.track.insertBefore(lastClone, this.origSlides[0]);
@@ -1331,24 +1088,15 @@
         this.index = index;
         this.track.style.transition = animate ? 'transform .9s cubic-bezier(.22,.61,.36,1)' : 'none';
         this.currentTranslate = -this.slideWidth * index;
-        this.prevTranslate = this.currentTranslate;
+        this.prevTranslate    = this.currentTranslate;
         this.track.style.transform = `translate3d(${this.currentTranslate}px,0,0)`;
       }
 
-      next() {
-        if (this.dragging) return;
-        this.jumpTo(this.index + 1, true);
-        this.resetProgress();
-      }
-
-      prev() {
-        if (this.dragging) return;
-        this.jumpTo(this.index - 1, true);
-        this.resetProgress();
-      }
+      next() { if (!this.dragging) { this.jumpTo(this.index + 1, true); this.resetProgress(); } }
+      prev() { if (!this.dragging) { this.jumpTo(this.index - 1, true); this.resetProgress(); } }
 
       normalize() {
-        if (this.index === 0) this.jumpTo(this.total, false);
+        if (this.index === 0)                 this.jumpTo(this.total, false);
         else if (this.index === this.total + 1) this.jumpTo(1, false);
         this.updateUI();
       }
@@ -1369,10 +1117,7 @@
         }, 5000);
       }
 
-      stopAuto() {
-        clearInterval(this.timer);
-        this.timer = null;
-      }
+      stopAuto()  { clearInterval(this.timer); this.timer = null; }
 
       animateProgress() {
         this.progressBar.style.transition = 'none';
@@ -1385,119 +1130,97 @@
 
       resetProgress() { this.animateProgress(); }
 
+      /* FIX: shared _openItem used by both origSlides and clones */
+      _openItem(gallery, idx) {
+        const item = GALLERY[gallery][idx];
+        if (item && item.is360) open360(item.src);
+        else openModal(gallery, idx);
+      }
+
       attachEvents() {
         this.nextBtn.addEventListener('click', () => this.next());
         this.prevBtn.addEventListener('click', () => this.prev());
         this.track.addEventListener('transitionend', () => this.normalize());
-        this.wrapper.addEventListener('mouseenter', () => { this.hovering = true; this.stopAuto(); });
+        this.wrapper.addEventListener('mouseenter', () => { this.hovering = true;  this.stopAuto(); });
         this.wrapper.addEventListener('mouseleave', () => { this.hovering = false; this.startAuto(); });
         window.addEventListener('resize', () => this.setWidths());
 
-        const down = (x) => {
-          this.dragging = true;
-          this.startX = x;
-          this.track.classList.add('dragging');
-          this.stopAuto();
-        };
-        const move = (x) => {
-          if (!this.dragging) return;
-          this.currentTranslate = this.prevTranslate + (x - this.startX);
-          this.track.style.transform = `translate3d(${this.currentTranslate}px,0,0)`;
-        };
-        const up = () => {
+        const down = x => { this.dragging = true;  this.startX = x; this.track.classList.add('dragging'); this.stopAuto(); };
+        const move = x => { if (!this.dragging) return; this.currentTranslate = this.prevTranslate + (x - this.startX); this.track.style.transform = `translate3d(${this.currentTranslate}px,0,0)`; };
+        const up   = () => {
           if (!this.dragging) return;
           this.dragging = false;
           this.track.classList.remove('dragging');
           const moved = this.currentTranslate - this.prevTranslate;
           if (moved < -60) this.index++;
-          if (moved > 60) this.index--;
+          if (moved >  60) this.index--;
           this.jumpTo(this.index, true);
           this.updateUI();
           this.startAuto();
         };
 
-        this.wrapper.addEventListener('mousedown', (e) => { if (!e.target.closest('.view-btn')) down(e.pageX); });
-        window.addEventListener('mousemove', (e) => move(e.pageX));
-        window.addEventListener('mouseup', up);
-        this.wrapper.addEventListener('touchstart', (e) => { if (!e.target.closest('.view-btn')) down(e.touches[0].clientX); }, {passive: true});
-        this.wrapper.addEventListener('touchmove', (e) => move(e.touches[0].clientX), {passive: true});
-        this.wrapper.addEventListener('touchend', up);
+        this.wrapper.addEventListener('mousedown',  e => { if (!e.target.closest('.view-btn')) down(e.pageX); });
+        window.addEventListener('mousemove', e => move(e.pageX));
+        window.addEventListener('mouseup',   up);
+        this.wrapper.addEventListener('touchstart', e => { if (!e.target.closest('.view-btn')) down(e.touches[0].clientX); }, {passive: true});
+        this.wrapper.addEventListener('touchmove',  e => move(e.touches[0].clientX), {passive: true});
+        this.wrapper.addEventListener('touchend',   up);
 
-        // Open lightbox on image or button click
+        const gallery = this.wrapper.dataset.slider;
         this.origSlides.forEach((slide, idx) => {
-          const gallery = this.wrapper.dataset.slider;
-          const openFn = () => {
-  const item = GALLERY[gallery][idx];
-  if (item.is360) {
-    open360(item.src);   // → opens 360 viewer
-  } else {
-    openModal(gallery, idx);  // → opens normal lightbox
-  }
-};
-slide.querySelector('img').addEventListener('click', openFn);
-slide.querySelector('.view-btn').addEventListener('click', openFn);
+          const fn = () => this._openItem(gallery, idx);
+          slide.querySelector('img').addEventListener('click', fn);
+          slide.querySelector('.view-btn').addEventListener('click', fn);
         });
 
-        // Also handle clones
+        /* FIX: clones now also route through _openItem, catching is360 correctly */
         this.track.querySelectorAll('.clone').forEach(clone => {
-          const gallery = this.wrapper.dataset.slider;
           const origIdx = parseInt(clone.querySelector('.view-btn').dataset.index || '0');
-          clone.querySelector('.view-btn').addEventListener('click', () => {
-            const item = GALLERY[gallery][origIdx];
-            if (item.is360) open360(item.src);
-            else openModal(gallery, origIdx);
-          });
-          clone.querySelector('img').addEventListener('click', () => {
-            const item = GALLERY[gallery][origIdx];
-            if (item.is360) open360(item.src);
-            else openModal(gallery, origIdx);
-          });
+          const fn = () => this._openItem(gallery, origIdx);
+          clone.querySelector('.view-btn').addEventListener('click', fn);
+          clone.querySelector('img').addEventListener('click', fn);
         });
       }
     }
 
+    /* FIX: sliders instantiated AFTER buildSlides so DOM is ready */
     const sliders = {};
     document.querySelectorAll('.slider').forEach(el => {
       sliders[el.dataset.slider] = new LuxurySlider(el);
     });
 
-    /* ─── LIGHTBOX / MODAL ───────────────────────────────────────── */
-    const modal = document.getElementById('lightbox');
+    /* ─── LIGHTBOX ──────────────────────────────────────────────── */
+    const modal        = document.getElementById('lightbox');
     const modalBackdrop = document.getElementById('modalBackdrop');
-    const modalImage = document.getElementById('modalImage');
-    const modalClose = document.getElementById('modalClose');
-    const modalPrev = document.getElementById('modalPrev');
-    const modalNext = document.getElementById('modalNext');
+    const modalImage   = document.getElementById('modalImage');
+    const modalClose   = document.getElementById('modalClose');
+    const modalPrev    = document.getElementById('modalPrev');
+    const modalNext    = document.getElementById('modalNext');
     const modalCounter = document.getElementById('modalCounter');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalText = document.getElementById('modalText');
-    const modalMedia = document.getElementById('modalMedia');
+    const modalTitle   = document.getElementById('modalTitle');
+    const modalText    = document.getElementById('modalText');
+    const modalMedia   = document.getElementById('modalMedia');
 
-    let currentGallery = 'stores';
-    let currentIdx = 0;
+    let currentGallery = 'stores', currentIdx = 0;
 
     function preload() {
       const items = GALLERY[currentGallery];
-      [
-        (currentIdx - 1 + items.length) % items.length,
-        (currentIdx + 1) % items.length
-      ].forEach(i => { const img = new Image(); img.src = items[i].src; });
+      [(currentIdx - 1 + items.length) % items.length, (currentIdx + 1) % items.length]
+        .forEach(i => { const img = new Image(); img.src = items[i].src; });
     }
 
     function renderModal() {
-      const items = GALLERY[currentGallery];
-      const item = items[currentIdx];
-      modalImage.src = item.src;
-      modalImage.alt = item.title;
-      modalTitle.textContent = item.title;
-      modalText.textContent = item.text;
-      modalCounter.textContent = `${String(currentIdx + 1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`;
+      const item = GALLERY[currentGallery][currentIdx];
+      modalImage.src           = item.src;
+      modalImage.alt           = item.title;
+      modalTitle.textContent   = item.title;
+      modalText.textContent    = item.text;
+      modalCounter.textContent = `${String(currentIdx + 1).padStart(2,'0')} / ${String(GALLERY[currentGallery].length).padStart(2,'0')}`;
       preload();
     }
 
     function openModal(gallery, index) {
-      currentGallery = gallery;
-      currentIdx = index;
+      currentGallery = gallery; currentIdx = index;
       renderModal();
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -1512,100 +1235,84 @@ slide.querySelector('.view-btn').addEventListener('click', openFn);
       Object.values(sliders).forEach(s => s.startAuto());
     }
 
-    function nextModal() {
-      currentIdx = (currentIdx + 1) % GALLERY[currentGallery].length;
-      renderModal();
-    }
-
-    function prevModal() {
-      currentIdx = (currentIdx - 1 + GALLERY[currentGallery].length) % GALLERY[currentGallery].length;
-      renderModal();
-    }
+    function nextModal() { currentIdx = (currentIdx + 1) % GALLERY[currentGallery].length; renderModal(); }
+    function prevModal() { currentIdx = (currentIdx - 1 + GALLERY[currentGallery].length) % GALLERY[currentGallery].length; renderModal(); }
 
     modalClose.addEventListener('click', closeModal);
     modalBackdrop.addEventListener('click', closeModal);
     modalNext.addEventListener('click', nextModal);
     modalPrev.addEventListener('click', prevModal);
 
+    /* FIX: merged two separate keydown listeners into one to prevent double-firing */
     window.addEventListener('keydown', e => {
-      if (!modal.classList.contains('open')) return;
-      if (e.key === 'Escape') closeModal();
-      if (e.key === 'ArrowRight') nextModal();
-      if (e.key === 'ArrowLeft') prevModal();
+      if (modal.classList.contains('open')) {
+        if (e.key === 'Escape')     closeModal();
+        if (e.key === 'ArrowRight') nextModal();
+        if (e.key === 'ArrowLeft')  prevModal();
+      }
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+      if (e.key === 'Escape' && modal360.classList.contains('open'))  close360Fn();
     });
 
     let mStartX = 0, mEndX = 0;
     modalMedia.addEventListener('touchstart', e => { mStartX = e.touches[0].clientX; }, {passive: true});
-    modalMedia.addEventListener('touchmove', e => { mEndX = e.touches[0].clientX; }, {passive: true});
-    modalMedia.addEventListener('touchend', () => {
+    modalMedia.addEventListener('touchmove',  e => { mEndX   = e.touches[0].clientX; }, {passive: true});
+    modalMedia.addEventListener('touchend',   () => {
       const d = mEndX - mStartX;
-      if (d > 60) prevModal();
+      if (d > 60)  prevModal();
       if (d < -60) nextModal();
       mStartX = mEndX = 0;
     });
 
-    // Pause sliders when tab is hidden
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) Object.values(sliders).forEach(s => s.stopAuto());
       else if (!body.classList.contains('modal-open')) Object.values(sliders).forEach(s => s.startAuto());
     });
 
-    // ESC closes mobile menu too
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
-    });
-    /* ── 360 VIEWER ─────────────────────────────────── */
-const modal360 = document.getElementById('modal360');
-const close360 = document.getElementById('close360');
-let viewer360 = null;
+    /* ─── 360 VIEWER ────────────────────────────────────────────── */
+    const modal360 = document.getElementById('modal360');
+    const close360 = document.getElementById('close360');
+    let viewer360  = null;
 
-function open360(src) {
-  if (typeof pannellum === 'undefined') {
-    console.error('Pannellum not loaded yet');
-    return;
-  }
-  body.classList.add('modal-open');
-  modal360.classList.add('open');
+    /* FIX: guard against pannellum not being loaded */
+    function open360(src) {
+      if (typeof pannellum === 'undefined') {
+        console.error('Pannellum library not loaded. Check CDN connection.');
+        return;
+      }
+      if (viewer360) { viewer360.destroy(); viewer360 = null; }
+      body.classList.add('modal-open');
+      modal360.classList.add('open');
+      modal360.setAttribute('aria-hidden', 'false');
+      Object.values(sliders).forEach(s => s.stopAuto());
 
-  modal360.setAttribute('aria-hidden', 'false');
-  Object.values(sliders).forEach(s => s.stopAuto());
+      viewer360 = pannellum.viewer('panorama360', {
+        type: 'equirectangular',
+        panorama: src,
+        autoLoad: true,
+        autoRotate: -2,
+        compass: false,
+        showZoomCtrl: false,
+        showFullscreenCtrl: false,
+        mouseZoom: true,
+        hfov: 100,
+        pitch: 0,
+        yaw: 0
+      });
+    }
 
-  // destroy any previous instance
-  if (viewer360) { viewer360.destroy(); viewer360 = null; }
+    function close360Fn() {
+      modal360.classList.remove('open');
+      modal360.setAttribute('aria-hidden', 'true');
+      body.classList.remove('modal-open');
+      if (viewer360) { viewer360.destroy(); viewer360 = null; }
+      Object.values(sliders).forEach(s => s.startAuto());
+    }
 
-  viewer360 = pannellum.viewer('panorama360', {
-    type: 'equirectangular',
-    panorama: src,
-    autoLoad: true,
-    autoRotate: -2,
-    compass: false,
-    showZoomCtrl: false,
-    showFullscreenCtrl: false,
-    mouseZoom: true,
-    hfov: 100,
-    pitch: 0,
-    yaw: 0,
-  });
-}
-
-function close360Fn() {
-  modal360.classList.remove('open');
-  modal360.setAttribute('aria-hidden', 'true');
-  body.classList.remove('modal-open');
-  if (viewer360) { viewer360.destroy(); viewer360 = null; }
-  Object.values(sliders).forEach(s => s.startAuto());
-}
-
-close360.addEventListener('click', close360Fn);
-modal360.querySelector('.modal-backdrop').addEventListener('click', close360Fn);
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && modal360.classList.contains('open')) close360Fn();
-});
+    close360.addEventListener('click', close360Fn);
+    modal360.querySelector('.modal-backdrop').addEventListener('click', close360Fn);
 
   })();
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js">
-
-</script>
+  </script>
 </body>
 </html>
