@@ -528,6 +528,25 @@
   word-break: break-word;
   transition: color .3s var(--ease);
 }
+    /* INSTALL PHOTO GRID */
+    .install-photo-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px;
+    }
+    .install-photo{
+      border-radius:26px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);position:relative;
+      aspect-ratio:4/3;
+    }
+    .install-photo img{
+      width:100%;height:100%;object-fit:cover;
+      filter:brightness(.86) saturate(.94);
+      transform:scale(1.03);transition:transform 2.4s var(--ease),filter .6s var(--ease);
+    }
+    .install-photo:hover img{transform:scale(1);filter:brightness(.95) saturate(1)}
+    @media(max-width:760px){
+      .install-photo-grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -646,21 +665,9 @@
             <p>Luxury is expressed through proportion, emptiness, clarity, and detail rather than excess, allowing the architecture to remain timeless.</p>
           </article>
         </div>
-        <div class="editorial-grid">
-          <article class="editorial-card reveal">
-            <div>
-              <h3>Material, tone, and visual calm.</h3>
-              <p>Creative studies focus on harmony rather than decoration. We build relationships between neutral palettes, warm light, tactile surfaces, and carefully scaled forms to create spaces that feel deeply composed.</p>
-            </div>
-            <div class="editorial-tags"><span class="tag">Light</span><span class="tag">Stone</span><span class="tag">Warm Gray</span><span class="tag">Editorial</span></div>
-          </article>
-          <article class="editorial-card reveal">
-            <div>
-              <h3>Concepts shaped like experiences.</h3>
-              <p>From first impression to final pause point, every visual decision supports movement and atmosphere. The result is an environment with its own internal rhythm and unmistakable identity.</p>
-            </div>
-            <div class="editorial-tags"><span class="tag">Proportion</span><span class="tag">Rhythm</span><span class="tag">Minimal</span><span class="tag">Luxury</span></div>
-          </article>
+        <div class="wide-media reveal" style="margin-top:46px">
+          <img src="img/Design.webp" alt="Design — from blueprint to built reality" />
+          <div class="overlay"><h3>From blueprint to built reality.</h3></div>
         </div>
         <div class="quote-block reveal">
           <div class="quote-label">Design Principle</div>
@@ -690,7 +697,7 @@
           <article class="timeline-card reveal"><div class="num">05</div><h3>Delivery</h3><p>The project is prepared for execution through consistency, control, and a continuous link between design and outcome.</p></article>
         </div>
         <div class="wide-media reveal">
-          <img src="commercial/Commercial_4.webp" alt="Technical visual storytelling" />
+          <img src="img/devlopement.webp" alt="Development — production and quality control" />
           <div class="overlay"><h3>Planning that preserves the original atmosphere.</h3></div>
         </div>
       </div>
@@ -709,23 +716,13 @@
             <p>We treat execution as a continuation of design—not a separate phase. Every installation decision must support proportion, texture, circulation, and the lived experience of the finished space.</p>
           </div>
         </div>
-        <div class="editorial-grid">
-          <article class="editorial-card reveal">
-            <div><h3>Furniture integration</h3><p>Objects are selected and positioned to belong to the architecture. Scale, silhouette, and spacing are composed to support comfort without visual noise.</p></div>
-            <div class="editorial-tags"><span class="tag">Furniture</span><span class="tag">Placement</span><span class="tag">Flow</span></div>
-          </article>
-          <article class="editorial-card reveal">
-            <div><h3>Lighting systems</h3><p>Light is designed to reveal material depth, soften transitions, and create a layered atmosphere that changes gracefully throughout the day.</p></div>
-            <div class="editorial-tags"><span class="tag">Warm Light</span><span class="tag">Contrast</span><span class="tag">Depth</span></div>
-          </article>
-          <article class="editorial-card reveal">
-            <div><h3>Material application</h3><p>Stone, timber, plaster, metal, and textile surfaces are coordinated to feel tactile and resolved, with every transition handled with quiet precision.</p></div>
-            <div class="editorial-tags"><span class="tag">Stone</span><span class="tag">Wood</span><span class="tag">Finish</span></div>
-          </article>
-          <article class="editorial-card reveal">
-            <div><h3>On-site choreography</h3><p>From final adjustments to visual balance, installation is directed so the completed space reads as one continuous, intentional composition.</p></div>
-            <div class="editorial-tags"><span class="tag">Execution</span><span class="tag">Detail</span><span class="tag">Atmosphere</span></div>
-          </article>
+        <div class="install-photo-grid reveal">
+          <div class="install-photo">
+            <img src="img/Installation.webp" alt="On-site installation — furniture and fixtures" />
+          </div>
+          <div class="install-photo">
+            <img src="img/Installation_2.webp" alt="Production and quality control in the workshop" />
+          </div>
         </div>
       </div>
     </section>
