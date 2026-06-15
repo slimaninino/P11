@@ -999,7 +999,7 @@
             'A polished destination where architecture and brand perception feel seamlessly aligned.'
           ]
         },
-        Retail: {
+        store: {
           folder: 'store', prefix: 'store_', label: 'Store',
           captions: [
             'Retail architecture shaped through clarity, premium restraint, and spatial identity.',
@@ -1029,8 +1029,7 @@
     };
 
     /* FIX: is360 flag set BEFORE buildSlides so HTML renders 360 badge correctly */
-    // GALLERY.stores[2].is360 = true;
-    GALLERY.stores[2].is360 = false
+    GALLERY.stores[2].is360 = true;
 
     /* ─── BUILD SLIDE HTML ──────────────────────────────────────── */
     function buildSlides(galleryKey) {
@@ -1050,10 +1049,8 @@
                 <h4>${item.title}</h4>
                 <p>${item.text}</p>
               </div>
-              // <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">${item.is360 ? 'View 360°' : 'Open'}</button>
-              <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">${item.is360 ? 'View' : 'Open'}</button>
-
-              </div>
+              <button class="view-btn" type="button" data-gallery="${galleryKey}" data-index="${i}">${item.is360 ? 'View 360°' : 'Open'}</button>
+            </div>
           </article>`;
       }).join('');
     }
